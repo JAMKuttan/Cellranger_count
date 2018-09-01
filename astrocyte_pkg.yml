@@ -120,7 +120,7 @@ workflow_parameters:
     max: 10000
     required: false
     description: |
-      Force pipeline to use this number of cells, bypassing the cell detection algorithm. Use this if the number of cells estimated by Cell Ranger is not consistent with the barcode rank plot. A value of 0 ignores this option.
+      Force pipeline to use this number of cells, bypassing the cell detection algorithm. Use this if the number of cells estimated by Cell Ranger is not consistent with the barcode rank plot. A value of 0 ignores this option. Any value other than 0 overrides expect-cells.
 
 # -----------------------------------------------------------------------------
 # SHINY APP CONFIGURATION
