@@ -92,7 +92,7 @@ workflow_parameters:
     description: |
       A design file listing sample, corresponding read1 filename, corresponding read2 filename. There can be multiple rows with the same sample name, if there are multiple fastq's for that sample.
 
-- id: genome
+  - id: genome
     type: select
     choices:
       - [ 'GRCh38', 'Human GRCh38']
