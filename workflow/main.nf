@@ -8,7 +8,7 @@ params.fastq = "$baseDir/../test_data/*.fastq.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
 params.genome = 'GRCh38'
 params.genomes = []
-params.refIndex = params.genome ? params.genomes[ params.genome ].ref ?: false : false
+params.refIndex = params.genomes[ params.genome ].ref
 params.expectCells = 10000
 params.forceCells = 0
 
