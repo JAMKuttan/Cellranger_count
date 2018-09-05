@@ -13,7 +13,7 @@ author: 'Gervaise Henry and Venkat Malladi'
 # A contact email address for questions
 email: 'bicf@utsouthwestern.edu'
 # A more informative title for the workflow package
-title: 'BICF CellRanger mkfastq Workflow'
+title: 'BICF CellRanger count Workflow'
 # A summary of the workflow package in plain text
 description: |
   This is a workflow package for the BICF/Strand Lab CellRanger count workflow system.
