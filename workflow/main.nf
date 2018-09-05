@@ -18,7 +18,7 @@ if( params.refIndex ){
     .fromPath(params.refIndex)
     .ifEmpty { exit 1, "referene not found: ${params.refIndex}" }
 } else {
-  exit 1, "No reference genome specified."
+  exit 1, "No reference genome specified. ${params.genome}"
 }
 
 // Define List of Files
