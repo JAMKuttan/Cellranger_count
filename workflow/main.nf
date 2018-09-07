@@ -12,13 +12,17 @@ params.ref = params.genome ? params.genomes[ params.genome ].ref ?: false : fals
 params.expectCells = 10000
 params.forceCells = 0
 
+println params.genome
+println params.genomes[ params.genome ].ref
+println params.ref
+
 // Check inputs
 if( params.ref ){
   refLocation = Channel
     .fromPath(params.ref)
     .ifEmpty { exit 1, "referene not found: ${params.ref}" }
 } else {
-  exit 1, "No reference genome specified. ${params.genome}  ${params.ref}  ${params.genomes[ ${params.genome} ].ref}"
+  exit 1, "No reference genome specified."
 }
 
 // Define List of Files
