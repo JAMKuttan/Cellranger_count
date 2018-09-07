@@ -10,14 +10,15 @@ params.genome = '/project/apps_database/cellranger/refdata-cellranger-GRCh38-1.2
 params.expectCells = 10000
 params.forceCells = 0
 
-// Define List of Files
+// Define regular variables
+designLocation = Channel
+  .fromPath(params.designFile)
+  .ifEmpty { exit 1, "design file not found: ${params.designFile}" }
 fastqList = Channel
   .fromPath(params.fastq)
   .flatten()
   .map { file -> [ file.getFileName().toString(), file.toString() ].join("\t") }
   .collectFile(name: 'fileList.tsv', newLine: true)
-
-// Define regular variables
 refLocation = Channel
   .fromPath(params.genome)
   .ifEmpty { exit 1, "referene not found: ${params.genome}" }
@@ -30,7 +31,7 @@ process checkDesignFile {
 
   input:
 
-  params.designFile
+  file designLocation
   file fastqList
 
   output:
@@ -41,7 +42,7 @@ process checkDesignFile {
 
   """
   module load python/3.6.1-2-anaconda
-  python3 $baseDir/scripts/check_design.py -d $params.designFile -f $fastqList
+  python3 $baseDir/scripts/check_design.py -d $designLocation -f $fastqList
   """
 }
 
