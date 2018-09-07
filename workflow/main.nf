@@ -8,7 +8,7 @@ params.fastq = "$baseDir/../test_data/*.fastq.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
 params.genome = 'GRCh38'
 params.genomes = []
-params.ref = params.genome ? params.genomes[ ${params.genome} ].ref ?: false : false
+params.ref = params.genome ? params.genomes[ params.genome ].ref ?: false : false
 params.expectCells = 10000
 params.forceCells = 0
 
@@ -18,7 +18,7 @@ if( params.ref ){
     .fromPath(params.ref)
     .ifEmpty { exit 1, "referene not found: ${params.ref}" }
 } else {
-  exit 1, "No reference genome specified."
+  exit 1, "No reference genome specified. ${params.genome}  ${params.ref}"
 }
 
 // Define List of Files
