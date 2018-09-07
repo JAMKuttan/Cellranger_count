@@ -6,24 +6,9 @@
 // Define Input variables
 params.fastq = "$baseDir/../test_data/*.fastq.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
-params.genome = 'GRCh38'
-params.genomes = []
-params.ref = params.genome ? params.genomes[ params.genome ].ref ?: false : false
+params.genome = '/project/apps_database/cellranger/refdata-cellranger-GRCh38-1.2.0'
 params.expectCells = 10000
 params.forceCells = 0
-
-println params.genome
-println params.genomes[ params.genome ].ref
-println params.ref
-
-// Check inputs
-if( params.ref ){
-  refLocation = Channel
-    .fromPath(params.ref)
-    .ifEmpty { exit 1, "referene not found: ${params.ref}" }
-} else {
-  exit 1, "No reference genome specified."
-}
 
 // Define List of Files
 fastqList = Channel
@@ -33,6 +18,9 @@ fastqList = Channel
   .collectFile(name: 'fileList.tsv', newLine: true)
 
 // Define regular variables
+refLocation = Channel
+  .fromPath(params.genome)
+  .ifEmpty { exit 1, "referene not found: ${params.genome}" }
 expectCells = params.expectCells
 forceCells = params.forceCells
 

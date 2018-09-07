@@ -95,11 +95,11 @@ workflow_parameters:
   - id: genome
     type: select
     choices:
-      - [ 'GRCh38', 'Human GRCh38']
-      - [ 'hg19', 'Human GRCh37 (hg19)']
-      - [ 'mm10', 'Mouse GRCm38 (mm10)']
-      - [ 'hg19.mm10', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm19)']
-      - [ 'ercc92', 'ERCC.92 Spike-In']
+      - [ '/project/apps_database/cellranger/refdata-cellranger-GRCh38-1.2.0', 'Human GRCh38']
+      - [ '/project/apps_database/cellranger/refdata-cellranger-hg19-1.2.0', 'Human GRCh37 (hg19)']
+      - [ '/project/apps_database/cellranger/refdata-cellranger-mm10-1.2.0', 'Mouse GRCm38 (mm10)']
+      - [ '/project/apps_database/cellranger/refdata-cellranger-hg19_and_mm10-1.2.0', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm19)']
+      - [ '/project/apps_database/cellranger/refdata-cellranger-ercc92-1.2.0', 'ERCC.92 Spike-In']
     required: true
     description: |
       Reference species and genome used for alignment and subsequent analysis.
