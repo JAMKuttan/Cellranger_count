@@ -8,17 +8,17 @@ params.fastq = "$baseDir/../test_data/*.fastq.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
 params.genome = 'GRCh38'
 params.genomes = []
-params.refIndex = params.genomes[ params.genome ].ref
+params.ref = params.genome ? params.genomes[ ${params.genome} ].ref ?: false : false
 params.expectCells = 10000
 params.forceCells = 0
 
 // Check inputs
-if( params.refIndex ){
+if( params.ref ){
   refLocation = Channel
-    .fromPath(params.refIndex)
-    .ifEmpty { exit 1, "referene not found: ${params.refIndex}" }
+    .fromPath(params.ref)
+    .ifEmpty { exit 1, "referene not found: ${params.ref}" }
 } else {
-  exit 1, "No reference genome specified. ${params.genome}"
+  exit 1, "No reference genome specified."
 }
 
 // Define List of Files
