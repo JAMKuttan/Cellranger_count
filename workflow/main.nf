@@ -71,15 +71,14 @@ process count {
   file("**/outs/**") into outPaths
 
   script:
-  """
-  module load cellranger/2.1.1
-  """
   if (forceCells == 0){
     """
+    module load cellranger/2.1.1
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells
     """
   } else {
     """
+    module load cellranger/2.1.1
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells
     """
   }
