@@ -76,11 +76,11 @@ process count {
   """
   if (forceCells == 0){
     """
-    cellranger count --id="$sample" --transcriptome="$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells
+    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells
     """
   } else {
     """
-    cellranger count --id="$sample" --transcriptome="$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells
+    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells
     """
   }
 }
