@@ -9,6 +9,7 @@ params.designFile = "$baseDir/../test_data/design.csv"
 params.genome = '/project/apps_database/cellranger/refdata-cellranger-GRCh38-1.2.0'
 params.expectCells = 10000
 params.forceCells = 0
+params.version = 3
 
 // Define regular variables
 designLocation = Channel
@@ -24,6 +25,7 @@ refLocation = Channel
   .ifEmpty { exit 1, "referene not found: ${params.genome}" }
 expectCells = params.expectCells
 forceCells = params.forceCells
+version = params.version
 
 process checkDesignFile {
 
