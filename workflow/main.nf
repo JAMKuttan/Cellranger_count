@@ -41,7 +41,6 @@ process checkDesignFile {
   script:
 
   """
-  module load python/3.6.1-2-anaconda
   python3 $baseDir/scripts/check_design.py -d $designLocation -f $fastqList
   """
 }
@@ -53,33 +52,78 @@ samples = designPaths
   .groupTuple()
   //.subscribe { println it }
 
+// Duplicate variables
+samples.into {
+  samples2
+  samples3
+}
+refLocation.into {
+  refLocation2
+  refLocation3
+}
+expectCells2 = expectCells
+expectCells3 = expectCells
+forceCells2 = forceCells
+forceCells3 = forceCells
 
-process count {
-  tag "$sample"
+process count2 {
+  tag "count2-$sample"
 
   publishDir "$baseDir/output", mode: 'copy'
 
   input:
 
-  set sample, file("${sample}_S1_L00?_R1_001.fastq.gz"), file("${sample}_S1_L00?_R2_001.fastq.gz") from samples
-  file ref from refLocation.first()
-  expectCells
-  forceCells
+  set sample, file("${sample}_S1_L00?_R1_001.fastq.gz"), file("${sample}_S1_L00?_R2_001.fastq.gz") from samples2
+  file ref from refLocation2.first()
+  expectCells2
+  forceCells2
 
   output:
 
-  file("**/outs/**") into outPaths
+  file("**/outs/**") into outPaths2
+
+  when:
+  version == 2
 
   script:
-  if (forceCells == 0){
-    """
-    module load cellranger/2.1.1
-    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells
-    """
+  if (forceCells2 == 0){
+    	"""
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells2
+    	"""
   } else {
-    """
-    module load cellranger/2.1.1
-    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells
-    """
+    	"""
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells2
+    	"""
+  }
+}
+
+process count3 {
+  tag "count3-$sample"
+
+  publishDir "$baseDir/output", mode: 'copy'
+
+  input:
+
+  set sample, file("${sample}_S1_L00?_R1_001.fastq.gz"), file("${sample}_S1_L00?_R2_001.fastq.gz") from samples3
+  file ref from refLocation3.first()
+  expectCells3
+  forceCells3
+
+  output:
+
+  file("**/outs/**") into outPaths3
+
+  when:
+  version == 3
+
+  script:
+  if (forceCells3 == 0){
+    	"""
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells3
+    	"""
+  } else {
+    	"""
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells3
+    	"""
   }
 }

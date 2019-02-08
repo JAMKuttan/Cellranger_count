@@ -41,6 +41,7 @@ documentation_files:
 workflow_modules:
   - 'python/3.6.1-2-anaconda'
   - 'cellranger/2.1.1'
+  - 'cellranger/3.0.1'
   - 'bcl2fastq/2.17.1.14'
 
 # A list of parameters used by the workflow, defining how to present them,
@@ -121,6 +122,16 @@ workflow_parameters:
     required: false
     description: |
       Force pipeline to use this number of cells, bypassing the cell detection algorithm. Use this if the number of cells estimated by Cell Ranger is not consistent with the barcode rank plot. A value of 0 ignores this option. Any value other than 0 overrides expect-cells.
+
+  - id: version
+    type: select
+    default: 3.0.1
+    choices:
+      - [ 3, '3.0.1']
+      - [ 2, '2.0.1']
+    required: true
+    description: |
+      10x cellranger version.
 
 # -----------------------------------------------------------------------------
 # SHINY APP CONFIGURATION
