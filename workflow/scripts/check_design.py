@@ -100,7 +100,7 @@ def main():
     new_design_df = check_design_headers(design_df)
     check_files(design_df, fastq_df)
 
-    new_design_df.to_csv('design.csv', header=True, sep=',', index=False)
+    new_design_df.to_csv('design.checked.csv', header=True, sep=',', index=False)
 
 if __name__ == '__main__':
     main()

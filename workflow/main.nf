@@ -36,7 +36,7 @@ process checkDesignFile {
 
   output:
 
-  file("design.csv") into designPaths
+  file("design.checked.csv") into designPaths
 
   script:
 
