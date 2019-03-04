@@ -9,7 +9,7 @@ params.designFile = "$baseDir/../test_data/design.csv"
 params.genome = '/project/apps_database/cellranger/refdata-cellranger-GRCh38-1.2.0'
 params.expectCells = 10000
 params.forceCells = 0
-params.version = 3
+params.version = 3.0.2
 
 // Define regular variables
 designLocation = Channel
@@ -56,76 +56,112 @@ samples = designPaths
 
 // Duplicate variables
 samples.into {
-  samples2
-  samples3
+  samples211
+  samples301
+  samples302
 }
 refLocation.into {
-  refLocation2
-  refLocation3
+  refLocation211
+  refLocation301
+  refLocation302
 }
-expectCells2 = expectCells
-expectCells3 = expectCells
-forceCells2 = forceCells
-forceCells3 = forceCells
 
-process count2 {
-  tag "count2-$sample"
+expectCells211 = expectCells
+expectCells301 = expectCells
+expectCells302 = expectCells
+forceCells211 = forceCells
+forceCells301 = forceCells
+forceCells302 = forceCells
+
+process count211 {
+  tag "count211-$sample"
 
   publishDir "$baseDir/output", mode: 'copy'
 
   input:
 
-  set sample, file("${sample}_S1_L00?_R1_001.fastq.gz"), file("${sample}_S1_L00?_R2_001.fastq.gz") from samples2
-  file ref from refLocation2.first()
-  expectCells2
-  forceCells2
+  set sample, file("${sample}_S1_L00?_R1_001.fastq.gz"), file("${sample}_S1_L00?_R2_001.fastq.gz") from samples211
+  file ref from refLocation211.first()
+  expectCells211
+  forceCells211
 
   output:
 
-  file("**/outs/**") into outPaths2
+  file("**/outs/**") into outPaths211
 
   when:
-  version == 2
+  version == 211
 
   script:
-  if (forceCells2 == 0){
+  if (forceCells211 == 0){
     	"""
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells2
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells211
     	"""
   } else {
     	"""
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells2
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells211
     	"""
   }
 }
 
-process count3 {
-  tag "count3-$sample"
+process count301 {
+  tag "count301-$sample"
 
   publishDir "$baseDir/output", mode: 'copy'
 
   input:
 
-  set sample, file("${sample}_S1_L00?_R1_001.fastq.gz"), file("${sample}_S1_L00?_R2_001.fastq.gz") from samples3
-  file ref from refLocation3.first()
-  expectCells3
-  forceCells3
+  set sample, file("${sample}_S1_L00?_R1_001.fastq.gz"), file("${sample}_S1_L00?_R2_001.fastq.gz") from samples301
+  file ref from refLocation301.first()
+  expectCells301
+  forceCells301
 
   output:
 
-  file("**/outs/**") into outPaths3
+  file("**/outs/**") into outPaths301
 
   when:
-  version == 3
+  version == 301
 
   script:
-  if (forceCells3 == 0){
+  if (forceCells301 == 0){
     	"""
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells3
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells301
     	"""
   } else {
     	"""
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells3
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells301
+    	"""
+  }
+}
+
+process count302 {
+  tag "count302-$sample"
+
+  publishDir "$baseDir/output", mode: 'copy'
+
+  input:
+
+  set sample, file("${sample}_S1_L00?_R1_001.fastq.gz"), file("${sample}_S1_L00?_R2_001.fastq.gz") from samples302
+  file ref from refLocation302.first()
+  expectCells302
+  forceCells302
+
+  output:
+
+  file("**/outs/**") into outPaths302
+
+  when:
+  version == 302
+
+  script:
+  if (forceCells302 == 0){
+    	"""
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells302
+    	"""
+  } else {
+    	"""
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells302
     	"""
   }
 }
