@@ -42,6 +42,7 @@ workflow_modules:
   - 'python/3.6.1-2-anaconda'
   - 'cellranger/2.1.1'
   - 'cellranger/3.0.1'
+  - 'cellranger/3.0.2'
   - 'bcl2fastq/2.17.1.14'
 
 # A list of parameters used by the workflow, defining how to present them,
@@ -125,10 +126,11 @@ workflow_parameters:
 
   - id: version
     type: select
-    default: 3.0.1
+    default: 3.0.2
     choices:
-      - [ 3, '3.0.1']
-      - [ 2, '2.0.1']
+      - [ 3.0.2, '3.0.2']
+      - [ 3.0.1, '3.0.1']
+      - [ 2.1.1, '2.1.1']
     required: true
     description: |
       10x cellranger version.
