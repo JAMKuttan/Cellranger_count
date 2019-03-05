@@ -6,7 +6,7 @@
 // Define Input variables
 params.fastq = "$baseDir/../test_data/*.fastq.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
-params.genome = '/project/apps_database/cellranger/refdata-cellranger-GRCh38-1.2.0'
+params.genome = 'refdata-cellranger-GRCh38-1.2.0'
 params.expectCells = 10000
 params.forceCells = 0
 params.version = '3.0.2'
@@ -21,7 +21,7 @@ fastqList = Channel
   .map { file -> [ file.getFileName().toString(), file.toString() ].join("\t") }
   .collectFile(name: 'fileList.tsv', newLine: true)
 refLocation = Channel
-  .fromPath(params.genome)
+  .fromPath('/project/apps_database/cellranger/'+params.genome)
   .ifEmpty { exit 1, "referene not found: ${params.genome}" }
 expectCells = params.expectCells
 forceCells = params.forceCells
