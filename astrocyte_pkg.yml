@@ -97,15 +97,15 @@ workflow_parameters:
   - id: genome
     type: select
     choices:
-      - [ 'refdata-cellranger-GRCh38-3.0.0', 'Human GRCh38 release 93']
-      - [ 'refdata-cellranger-GRCh38-1.2.0', 'Human GRCh38 release 84']
-      - [ 'refdata-cellranger-hg19-3.0.0', 'Human GRCh37 (hg19) release 87']
-      - [ 'refdata-cellranger-hg19-1.2.0', 'Human GRCh37 (hg19) release 84']
-      - [ 'refdata-cellranger-mm10-3.0.0', 'Mouse GRCm38 (mm10) release 93']
-      - [ 'refdata-cellranger-mm10-1.2.0', 'Mouse GRCm38 (mm10) release 84']
-      - [ 'refdata-cellranger-hg19_and_mm10-3.0.0', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 93']
-      - [ 'refdata-cellranger-hg19_and_mm10-1.2.0', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 84']
-      - [ 'refdata-cellranger-ercc92-1.2.0', 'ERCC.92 Spike-In']
+      - [ 'GRCh38-3.0.0', 'Human GRCh38 release 93']
+      - [ 'GRCh38-1.2.0', 'Human GRCh38 release 84']
+      - [ 'hg19-3.0.0', 'Human GRCh37 (hg19) release 87']
+      - [ 'hg19-1.2.0', 'Human GRCh37 (hg19) release 84']
+      - [ 'mm10-3.0.0', 'Mouse GRCm38 (mm10) release 93']
+      - [ 'mm10-1.2.0', 'Mouse GRCm38 (mm10) release 84']
+      - [ 'hg19_and_mm10-3.0.0', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 93']
+      - [ 'hg19_and_mm10-1.2.0', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 84']
+      - [ 'ercc92-1.2.0', 'ERCC.92 Spike-In']
     required: true
     description: |
       Reference species and genome used for alignment and subsequent analysis.
