@@ -9,7 +9,7 @@ params.designFile = "$baseDir/../test_data/design.csv"
 params.genome = '/project/apps_database/cellranger/refdata-cellranger-GRCh38-1.2.0'
 params.expectCells = 10000
 params.forceCells = 0
-params.version = 3.0.2
+params.version = '3.0.2'
 
 // Define regular variables
 designLocation = Channel
@@ -90,7 +90,7 @@ process count211 {
   file("**/outs/**") into outPaths211
 
   when:
-  version == 211
+  version == '2.1.1'
 
   script:
   if (forceCells211 == 0){
@@ -121,7 +121,7 @@ process count301 {
   file("**/outs/**") into outPaths301
 
   when:
-  version == 301
+  version == '3.0.1'
 
   script:
   if (forceCells301 == 0){
@@ -152,7 +152,7 @@ process count302 {
   file("**/outs/**") into outPaths302
 
   when:
-  version == 302
+  version == '3.0.2'
 
   script:
   if (forceCells302 == 0){
