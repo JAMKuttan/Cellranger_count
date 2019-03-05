@@ -12,6 +12,7 @@ params.genomeLocation = params.genome ? params.genomes[ params.genome ].loc ?: f
 params.expectCells = 10000
 params.forceCells = 0
 params.version = '3.0.2'
+params.outDir = "$baseDir/output"
 
 // Define regular variables
 designLocation = Channel
@@ -28,10 +29,11 @@ refLocation = Channel
 expectCells = params.expectCells
 forceCells = params.forceCells
 version = params.version
+outDir = params.outDir
 
 process checkDesignFile {
 
-  publishDir "$baseDir/output", mode: 'copy'
+  publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
 
@@ -78,7 +80,7 @@ forceCells302 = forceCells
 process count211 {
   tag "count211-$sample"
 
-  publishDir "$baseDir/output", mode: 'copy'
+  publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
 
@@ -109,7 +111,7 @@ process count211 {
 process count301 {
   tag "count301-$sample"
 
-  publishDir "$baseDir/output", mode: 'copy'
+  publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
 
@@ -140,7 +142,7 @@ process count301 {
 process count302 {
   tag "count302-$sample"
 
-  publishDir "$baseDir/output", mode: 'copy'
+  publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
 
