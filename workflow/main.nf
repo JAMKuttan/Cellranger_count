@@ -6,11 +6,14 @@
 // Define Input variables
 params.fastq = "$baseDir/../test_data/*.fastq.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
-params.genome = 'GRCh38-1.2.0'
+params.genome = 'GRCh38-3.0.0'
 params.genomes = []
 params.genomeLocation = params.genome ? params.genomes[ params.genome ].loc ?: false : false
 params.expectCells = 10000
 params.forceCells = 0
+params.kitVersion = '3'
+params.chemistry = []
+params.chemistryParam = params.kitVersion ? params.chemistry[ params.kitVersion ].param ?: false : false
 params.version = '3.0.2'
 params.outDir = "$baseDir/output"
 
@@ -28,6 +31,7 @@ refLocation = Channel
   .ifEmpty { exit 1, "referene not found: ${params.genome}" }
 expectCells = params.expectCells
 forceCells = params.forceCells
+chemistryParam = params.chemistryParam
 version = params.version
 outDir = params.outDir
 
@@ -69,13 +73,14 @@ refLocation.into {
   refLocation301
   refLocation302
 }
-
 expectCells211 = expectCells
 expectCells301 = expectCells
 expectCells302 = expectCells
 forceCells211 = forceCells
 forceCells301 = forceCells
 forceCells302 = forceCells
+chemistryParam301 = chemistryParam
+chemistryParam302 = chemistryParam
 
 process count211 {
   tag "count211-$sample"
@@ -119,6 +124,7 @@ process count301 {
   file ref from refLocation301.first()
   expectCells301
   forceCells301
+  chemistryParam301
 
   output:
 
@@ -130,11 +136,11 @@ process count301 {
   script:
   if (forceCells301 == 0){
     	"""
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells301
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells301 --chemistry="$chemistryParam301"
     	"""
   } else {
     	"""
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells301
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells301 --chemistry="$chemistryParam301"
     	"""
   }
 }
@@ -150,6 +156,7 @@ process count302 {
   file ref from refLocation302.first()
   expectCells302
   forceCells302
+  chemistryParam302
 
   output:
 
@@ -161,11 +168,11 @@ process count302 {
   script:
   if (forceCells302 == 0){
     	"""
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells302
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells302 --chemistry="$chemistryParam302"
     	"""
   } else {
     	"""
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells302
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells302 --chemistry="$chemistryParam302"
     	"""
   }
 }
