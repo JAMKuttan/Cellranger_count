@@ -150,6 +150,15 @@ workflow_parameters:
     description: |
       10x cellranger version.
 
+  - id: feature
+    type: select
+    default: 'no'
+    choices:
+      - [ 'no', 'No']
+      - [ 'yes', 'Yes']
+    required: true
+    description: |
+      Additional features to count (only used in cellranger version 3+, ignored otherwise).
 
 # -----------------------------------------------------------------------------
 # SHINY APP CONFIGURATION
