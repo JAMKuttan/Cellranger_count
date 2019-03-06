@@ -128,6 +128,17 @@ workflow_parameters:
     description: |
       Force pipeline to use this number of cells, bypassing the cell detection algorithm. Use this if the number of cells estimated by Cell Ranger is not consistent with the barcode rank plot. A value of 0 ignores this option. Any value other than 0 overrides expect-cells.
 
+  - id: kitVersion
+    type: select
+    default: 'auto'
+    choices:
+      - [ 'auto', 'Auto Detect']
+      - [ '3', '3']
+      - [ '2', '2']
+    required: true
+    description: |
+      10x single cell gene expression chemistry version (only used in cellranger version 2.x).
+
   - id: version
     type: select
     default: '3.0.2'
@@ -138,6 +149,7 @@ workflow_parameters:
     required: true
     description: |
       10x cellranger version.
+
 
 # -----------------------------------------------------------------------------
 # SHINY APP CONFIGURATION
