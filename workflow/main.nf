@@ -6,9 +6,17 @@
 // Define Input variables
 params.fastq = "$baseDir/../test_data/*.fastq.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
-params.genome = '/project/apps_database/cellranger/refdata-cellranger-GRCh38-1.2.0'
+params.genome = 'GRCh38-3.0.0'
+params.genomes = []
+params.genomeLocation = params.genome ? params.genomes[ params.genome ].loc ?: false : false
+params.genomeLocationFull = params.genomeLocation+params.genome
 params.expectCells = 10000
 params.forceCells = 0
+params.kitVersion = 'three'
+params.chemistry = []
+params.chemistryParam = params.kitVersion ? params.chemistry[ params.kitVersion ].param ?: false : false
+params.version = '3.0.2'
+params.outDir = "$baseDir/output"
 
 // Define regular variables
 designLocation = Channel
@@ -20,14 +28,17 @@ fastqList = Channel
   .map { file -> [ file.getFileName().toString(), file.toString() ].join("\t") }
   .collectFile(name: 'fileList.tsv', newLine: true)
 refLocation = Channel
-  .fromPath(params.genome)
+  .fromPath(params.genomeLocationFull)
   .ifEmpty { exit 1, "referene not found: ${params.genome}" }
 expectCells = params.expectCells
 forceCells = params.forceCells
+chemistryParam = params.chemistryParam
+version = params.version
+outDir = params.outDir
 
 process checkDesignFile {
 
-  publishDir "$baseDir/output", mode: 'copy'
+  publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
 
@@ -36,12 +47,11 @@ process checkDesignFile {
 
   output:
 
-  file("design.csv") into designPaths
+  file("design.checked.csv") into designPaths
 
   script:
 
   """
-  module load python/3.6.1-2-anaconda
   python3 $baseDir/scripts/check_design.py -d $designLocation -f $fastqList
   """
 }
@@ -53,33 +63,117 @@ samples = designPaths
   .groupTuple()
   //.subscribe { println it }
 
+// Duplicate variables
+samples.into {
+  samples211
+  samples301
+  samples302
+}
+refLocation.into {
+  refLocation211
+  refLocation301
+  refLocation302
+}
+expectCells211 = expectCells
+expectCells301 = expectCells
+expectCells302 = expectCells
+forceCells211 = forceCells
+forceCells301 = forceCells
+forceCells302 = forceCells
+chemistryParam301 = chemistryParam
+chemistryParam302 = chemistryParam
 
-process count {
-  tag "$sample"
+process count211 {
+  tag "count211-$sample"
 
-  publishDir "$baseDir/output", mode: 'copy'
+  publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
 
-  set sample, file("${sample}_S1_L00?_R1_001.fastq.gz"), file("${sample}_S1_L00?_R2_001.fastq.gz") from samples
-  file ref from refLocation.first()
-  expectCells
-  forceCells
+  set sample, file("${sample}_S1_L00?_R1_001.fastq.gz"), file("${sample}_S1_L00?_R2_001.fastq.gz") from samples211
+  file ref from refLocation211.first()
+  expectCells211
+  forceCells211
 
   output:
 
-  file("**/outs/**") into outPaths
+  file("**/outs/**") into outPaths211
+
+  when:
+  version == '2.1.1'
 
   script:
-  if (forceCells == 0){
-    """
-    module load cellranger/2.1.1
-    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells
-    """
+  if (forceCells211 == 0){
+    	"""
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells211
+    	"""
   } else {
-    """
-    module load cellranger/2.1.1
-    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells
-    """
+    	"""
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells211
+    	"""
+  }
+}
+
+process count301 {
+  tag "count301-$sample"
+
+  publishDir "$outDir/${task.process}", mode: 'copy'
+
+  input:
+
+  set sample, file("${sample}_S1_L00?_R1_001.fastq.gz"), file("${sample}_S1_L00?_R2_001.fastq.gz") from samples301
+  file ref from refLocation301.first()
+  expectCells301
+  forceCells301
+  chemistryParam301
+
+  output:
+
+  file("**/outs/**") into outPaths301
+
+  when:
+  version == '3.0.1'
+
+  script:
+  if (forceCells301 == 0){
+    	"""
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells301 --chemistry="$chemistryParam301"
+    	"""
+  } else {
+    	"""
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells301 --chemistry="$chemistryParam301"
+    	"""
+  }
+}
+
+process count302 {
+  tag "count302-$sample"
+
+  publishDir "$outDir/${task.process}", mode: 'copy'
+
+  input:
+
+  set sample, file("${sample}_S1_L00?_R1_001.fastq.gz"), file("${sample}_S1_L00?_R2_001.fastq.gz") from samples302
+  file ref from refLocation302.first()
+  expectCells302
+  forceCells302
+  chemistryParam302
+
+  output:
+
+  file("**/outs/**") into outPaths302
+
+  when:
+  version == '3.0.2'
+
+  script:
+  if (forceCells302 == 0){
+    	"""
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells302 --chemistry="$chemistryParam302"
+    	"""
+  } else {
+    	"""
+    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells302 --chemistry="$chemistryParam302"
+    	"""
   }
 }

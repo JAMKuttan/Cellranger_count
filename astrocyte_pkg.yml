@@ -41,6 +41,8 @@ documentation_files:
 workflow_modules:
   - 'python/3.6.1-2-anaconda'
   - 'cellranger/2.1.1'
+  - 'cellranger/3.0.1'
+  - 'cellranger/3.0.2'
   - 'bcl2fastq/2.17.1.14'
 
 # A list of parameters used by the workflow, defining how to present them,
@@ -95,11 +97,15 @@ workflow_parameters:
   - id: genome
     type: select
     choices:
-      - [ '/project/apps_database/cellranger/refdata-cellranger-GRCh38-1.2.0', 'Human GRCh38']
-      - [ '/project/apps_database/cellranger/refdata-cellranger-hg19-1.2.0', 'Human GRCh37 (hg19)']
-      - [ '/project/apps_database/cellranger/refdata-cellranger-mm10-1.2.0', 'Mouse GRCm38 (mm10)']
-      - [ '/project/apps_database/cellranger/refdata-cellranger-hg19_and_mm10-1.2.0', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm19)']
-      - [ '/project/apps_database/cellranger/refdata-cellranger-ercc92-1.2.0', 'ERCC.92 Spike-In']
+      - [ 'GRCh38-3.0.0', 'Human GRCh38 release 93']
+      - [ 'GRCh38-1.2.0', 'Human GRCh38 release 84']
+      - [ 'hg19-3.0.0', 'Human GRCh37 (hg19) release 87']
+      - [ 'hg19-1.2.0', 'Human GRCh37 (hg19) release 84']
+      - [ 'mm10-3.0.0', 'Mouse GRCm38 (mm10) release 93']
+      - [ 'mm10-1.2.0', 'Mouse GRCm38 (mm10) release 84']
+      - [ 'hg19_and_mm10-3.0.0', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 93']
+      - [ 'hg19_and_mm10-1.2.0', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 84']
+      - [ 'ercc92-1.2.0', 'ERCC.92 Spike-In']
     required: true
     description: |
       Reference species and genome used for alignment and subsequent analysis.
@@ -121,6 +127,29 @@ workflow_parameters:
     required: false
     description: |
       Force pipeline to use this number of cells, bypassing the cell detection algorithm. Use this if the number of cells estimated by Cell Ranger is not consistent with the barcode rank plot. A value of 0 ignores this option. Any value other than 0 overrides expect-cells.
+
+  - id: kitVersion
+    type: select
+    default: 'auto'
+    choices:
+      - [ 'auto', 'Auto Detect']
+      - [ 'three', '3']
+      - [ 'two', '2']
+    required: true
+    description: |
+      10x single cell gene expression chemistry version (only used in cellranger version 2.x).
+
+  - id: version
+    type: select
+    default: '3.0.2'
+    choices:
+      - [ '3.0.2', '3.0.2']
+      - [ '3.0.1', '3.0.1']
+      - [ '2.1.1', '2.1.1']
+    required: true
+    description: |
+      10x cellranger version.
+
 
 # -----------------------------------------------------------------------------
 # SHINY APP CONFIGURATION
