@@ -300,6 +300,9 @@ $RECYCLE.BIN/
 /workflow/.nextflow/*
 /workflow/work/*
 /workflow/output/*
+/.nextflow/*
+/work/*
+/output/*
 pipeline_trace*.txt*
 .nextflow*.log*
 report.html*
