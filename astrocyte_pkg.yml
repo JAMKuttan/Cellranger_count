@@ -133,8 +133,8 @@ workflow_parameters:
     default: 'auto'
     choices:
       - [ 'auto', 'Auto Detect']
-      - [ '3', '3']
-      - [ '2', '2']
+      - [ 'three', '3']
+      - [ 'two', '2']
     required: true
     description: |
       10x single cell gene expression chemistry version (only used in cellranger version 2.x).
