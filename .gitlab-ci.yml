@@ -17,14 +17,14 @@ simple_cr2v2ref1.2.0:
 simple_cr2v2ref3.0.0:
   stage: integration
   script:
-  - nextflow run workflow/main.nf --fastq = "$CI_PROJECT_DIR/test_data/v2s2r100k/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/v2s2r100k/design.csv" --genome = 'GRCh38-3.0.0' --kitVersion = 'two' --version = '2.1.1'
+  - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/v2s2r100k/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/v2s2r100k/design.csv" --genome 'GRCh38-3.0.0' --kitVersion 'two' --version '2.1.1'
 
 simple_cr3v2ref3.0.0:
   stage: integration
   script:
-  - nextflow run workflow/main.nf --fastq = "$CI_PROJECT_DIR/test_data/v2s2r100k/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/v2s2r100k/design.csv" --genome = 'GRCh38-3.0.0' --kitVersion = 'two' --version = '3.0.2'
+  - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/v2s2r100k/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/v2s2r100k/design.csv" --genome 'GRCh38-3.0.0' --kitVersion 'two' --version '3.0.2'
 
 simple_cr3v3ref3.0.0:
   stage: integration
   script:
-  - nextflow run workflow/main.nf --fastq = "$CI_PROJECT_DIR/test_data/v3s2r100k/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/v3s2r100k/design.csv" --genome = 'GRCh38-3.0.0' --kitVersion = 'three' --version = '3.0.2'
+  - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/v3s2r100k/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/v3s2r100k/design.csv" --genome 'GRCh38-3.0.0' --kitVersion 'three' --version '3.0.2'
