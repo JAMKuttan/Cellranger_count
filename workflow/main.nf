@@ -8,7 +8,8 @@ params.fastq = "$baseDir/../test_data/*.fastq.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
 params.genome = 'GRCh38-3.0.0'
 params.genomes = []
-params.genomeLocation = params.genome ? params.genomes[ params.genome ].loc ?: false : false + params.genome
+params.genomeLocation = params.genome ? params.genomes[ params.genome ].loc ?: false : false
+params.genomeLocationFull = params.genomeLocation+params.genome
 params.expectCells = 10000
 params.forceCells = 0
 params.kitVersion = 'three'
@@ -27,7 +28,7 @@ fastqList = Channel
   .map { file -> [ file.getFileName().toString(), file.toString() ].join("\t") }
   .collectFile(name: 'fileList.tsv', newLine: true)
 refLocation = Channel
-  .fromPath(params.genomeLocation)
+  .fromPath(params.genomeLocationFull)
   .ifEmpty { exit 1, "referene not found: ${params.genome}" }
 expectCells = params.expectCells
 forceCells = params.forceCells
