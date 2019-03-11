@@ -32,7 +32,7 @@ if (params.astrocyte == 'false') {
   } else if (params.kitVersion == "three") {
     params.chemistryParam ='SC3Pv3'
   } else {
-    params.chemistryParam = "auto'
+    params.chemistryParam = 'auto'
   }
 }
 params.genomeLocationFull = params.genomeLocation+params.genome
