@@ -150,6 +150,12 @@ workflow_parameters:
     description: |
       10x cellranger version.
 
+  - id: astrocyte
+    type: select
+    default: 'true'
+    regex: 'true'
+    description: |
+      10x cellranger version.
 
 # -----------------------------------------------------------------------------
 # SHINY APP CONFIGURATION

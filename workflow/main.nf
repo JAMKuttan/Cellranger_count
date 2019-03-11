@@ -7,16 +7,35 @@
 params.fastq = "$baseDir/../test_data/*.fastq.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
 params.genome = 'GRCh38-3.0.0'
-params.genomes = []
-params.genomeLocation = params.genome ? params.genomes[ params.genome ].loc ?: false : false
-params.genomeLocationFull = params.genomeLocation+params.genome
+
+
 params.expectCells = 10000
 params.forceCells = 0
 params.kitVersion = 'three'
-params.chemistry = []
-params.chemistryParam = params.kitVersion ? params.chemistry[ params.kitVersion ].param ?: false : false
+
 params.version = '3.0.2'
+params.astrocyte = 'false'
 params.outDir = "$baseDir/output"
+
+// Assign variables if astrocyte
+if (params.astrocyte == 'false') {
+  params.genomes = []
+  params.genomeLocation = params.genome ? params.genomes[ params.genome ].loc ?: false : false
+  params.chemistry = []
+  params.chemistryParam = params.kitVersion ? params.chemistry[ params.kitVersion ].param ?: false : false
+} else if (params.astrocyte == 'true') {
+  params.genomeLocation = '/project/apps_database/cellranger/refdata-cellranger-'
+  if (params.kitVersion == "one") {
+    params.chemistryParam ='SC3Pv1'
+  } else if (params.kitVersion == "two") {
+    params.chemistryParam ='SC3Pv2'
+  } else if (params.kitVersion == "three") {
+    params.chemistryParam ='SC3Pv3'
+  } else {
+    params.chemistryParam = 'auto'
+  }
+}
+params.genomeLocationFull = params.genomeLocation+params.genome
 
 // Define regular variables
 designLocation = Channel
@@ -84,6 +103,7 @@ chemistryParam301 = chemistryParam
 chemistryParam302 = chemistryParam
 
 process count211 {
+  memory  '120 GB'
   tag "count211-$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
@@ -115,6 +135,7 @@ process count211 {
 }
 
 process count301 {
+  memory  '120 GB'
   tag "count301-$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
@@ -147,6 +168,7 @@ process count301 {
 }
 
 process count302 {
+  memory  '120 GB'
   tag "count302-$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
