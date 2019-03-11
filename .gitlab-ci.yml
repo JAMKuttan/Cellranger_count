@@ -2,10 +2,10 @@ before_script:
   - module load astrocyte
   - module load python/3.6.1-2-anaconda
   - module load nextflow/0.31.1_Ignite
-  - mkdir test_data/v2s2r100k
-  - mkdir test_data/v3s2r100k
-  - ln -s /project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/mu.v2s2r10k/* test_data/mu.v2s2r10k/
-  - ln -s /project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v3s2r10k/* test_data/hu.v3s2r10k/
+  - mkdir test_data/mu_v2s2r10k
+  - mkdir test_data/hu_v3s2r10k
+  - ln -s /project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/mu_v2s2r10k/* test_data/mu_v2s2r10k/
+  - ln -s /project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu_v3s2r10k/* test_data/hu_v3s2r10k/
 
 stages:
   - astrocyte
@@ -19,9 +19,9 @@ astrocyte_check:
 simple_mu.cr2v2ref1.2.0:
   stage: run
   script:
-  - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/mu.v2s2r10k/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/mu.v2s2r10k/design.csv" --genome 'GRCh38-1.2.0' --kitVersion 'two' --version '2.1.1'
+  - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/mu_v2s2r10k/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/mu_v2s2r10k/design.csv" --genome 'GRCh38-1.2.0' --kitVersion 'two' --version '2.1.1'
 
 simple_hu.cr3v3ref3.0.0:
   stage: run
   script:
-  - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/hu.v3s2r10k/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/hu.v3s2r10k/design.csv" --genome 'GRCh38-3.0.0' --kitVersion 'three' --version '3.0.2'
+  - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/hu_v3s2r10k/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/hu_v3s2r10k/design.csv" --genome 'GRCh38-3.0.0' --kitVersion 'three' --version '3.0.2'
