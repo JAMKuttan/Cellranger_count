@@ -84,6 +84,7 @@ chemistryParam301 = chemistryParam
 chemistryParam302 = chemistryParam
 
 process count211 {
+  memory  '120 GB'
   tag "count211-$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
@@ -115,6 +116,7 @@ process count211 {
 }
 
 process count301 {
+  memory  '120 GB'
   tag "count301-$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
@@ -147,6 +149,7 @@ process count301 {
 }
 
 process count302 {
+  memory  '120 GB'
   tag "count302-$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
