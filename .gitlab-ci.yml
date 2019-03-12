@@ -16,12 +16,16 @@ astrocyte_check:
   script:
   - astrocyte_cli check ../cellranger_count
 
-simple_mu.cr2v2ref1.2.0:
+run_mu.cr2v2ref1.2.0:
   stage: run
+  except:
+    - tags
   script:
   - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/mu.v2s2r10k/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/mu.v2s2r10k/design.csv" --genome 'mm10-1.2.0' --kitVersion 'two' --version '2.1.1'
 
-simple_hu.cr3v3ref3.0.0:
+run_hu.cr3v3ref3.0.0:
   stage: run
+  except:
+    - tags
   script:
   - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/hu.v3s2r10k/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/hu.v3s2r10k/design.csv" --genome 'GRCh38-3.0.0' --kitVersion 'three' --version '3.0.2'
