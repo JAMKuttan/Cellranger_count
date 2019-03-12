@@ -151,10 +151,12 @@ workflow_parameters:
       10x cellranger version.
 
   - id: astrocyte
-    type: string
-    required: true
+    type: select
     default: 'true'
-    regex: "true"
+    choices:
+      - [ 'true', 'true']
+    required: true
+    regex: 'true'
     description: |
       Ensure configuraton for astrocyte.
 
