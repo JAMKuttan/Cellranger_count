@@ -71,6 +71,7 @@ process checkDesignFile {
   script:
 
   """
+  module load python/3.6.1-2-anaconda
   python3 $baseDir/scripts/check_design.py -d $designLocation -f $fastqList
   """
 }
@@ -123,6 +124,9 @@ process count211 {
   version == '2.1.1'
 
   script:
+  """
+  module load cellranger/2.1.1
+  """
   if (forceCells211 == 0){
     	"""
     	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells211
@@ -156,6 +160,9 @@ process count301 {
   version == '3.0.1'
 
   script:
+  """
+  module load cellranger/3.0.1
+  """
   if (forceCells301 == 0){
     	"""
     	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells301 --chemistry="$chemistryParam301"
@@ -189,6 +196,9 @@ process count302 {
   version == '3.0.2'
 
   script:
+  """
+  module load cellranger/3.0.2
+  """
   if (forceCells302 == 0){
     	"""
     	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells302 --chemistry="$chemistryParam302"
