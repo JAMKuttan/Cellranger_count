@@ -14,16 +14,12 @@ params.forceCells = 0
 params.kitVersion = 'three'
 
 params.version = '3.0.2'
-params.astrocyte = 'false'
+params.astrocyte = false
 params.outDir = "$baseDir/output"
 
 // Assign variables if astrocyte
-if (params.astrocyte == 'false') {
-  params.genomes = []
-  params.genomeLocation = params.genome ? params.genomes[ params.genome ].loc ?: false : false
-  params.chemistry = []
-  params.chemistryParam = params.kitVersion ? params.chemistry[ params.kitVersion ].param ?: false : false
-} else if (params.astrocyte == 'true') {
+if (params.astrocyte) {
+  print("Running under astrocyte")
   params.genomeLocation = '/project/apps_database/cellranger/refdata-cellranger-'
   if (params.kitVersion == "one") {
     params.chemistryParam ='SC3Pv1'
@@ -34,6 +30,12 @@ if (params.astrocyte == 'false') {
   } else {
     params.chemistryParam = 'auto'
   }
+} else {
+  params.genomes = []
+  params.genomeLocation = params.genome ? params.genomes[ params.genome ].loc ?: false : false
+  params.chemistry = []
+  params.chemistryParam = params.kitVersion ? params.chemistry[ params.kitVersion ].param ?: false : false
+
 }
 params.genomeLocationFull = params.genomeLocation+params.genome
 
