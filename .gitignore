@@ -305,7 +305,7 @@ $RECYCLE.BIN/
 /output/*
 pipeline_trace*.txt*
 .nextflow*.log*
-report.html*
+report*.html*
 timeline*.html*
 
 *~
