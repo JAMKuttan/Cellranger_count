@@ -137,7 +137,7 @@ workflow_parameters:
       - [ 'two', '2']
     required: true
     description: |
-      10x single cell gene expression chemistry version (only used in cellranger version 2.x).
+      10x single cell gene expression chemistry version (only used in cellranger version 3.x).
 
   - id: version
     type: select
@@ -151,10 +151,11 @@ workflow_parameters:
       10x cellranger version.
 
   - id: astrocyte
-    type: string
+    type: select
+    choices:
+      - [ 'true', 'true' ]
     required: true
     default: 'true'
-    regex: "true"
     description: |
       Ensure configuraton for astrocyte.
 
@@ -176,5 +177,4 @@ vizapp_cran_packages:
 
 # List of any Bioconductor packages, not provided by the modules,
 # that must be made available to the vizapp
-vizapp_bioc_packages:
-  - chipseq
+vizapp_bioc_packages: []
