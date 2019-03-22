@@ -177,5 +177,4 @@ vizapp_cran_packages:
 
 # List of any Bioconductor packages, not provided by the modules,
 # that must be made available to the vizapp
-vizapp_bioc_packages:
-  - chipseq
+vizapp_bioc_packages: []
