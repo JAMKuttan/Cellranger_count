@@ -7,12 +7,9 @@
 params.fastq = "$baseDir/../test_data/*.fastq.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
 params.genome = 'GRCh38-3.0.0'
-
-
 params.expectCells = 10000
 params.forceCells = 0
 params.kitVersion = 'three'
-
 params.version = '3.0.2'
 params.astrocyte = false
 params.outDir = "$baseDir/output"
@@ -35,7 +32,6 @@ if (params.astrocyte) {
   params.genomeLocation = params.genome ? params.genomes[ params.genome ].loc ?: false : false
   params.chemistry = []
   params.chemistryParam = params.kitVersion ? params.chemistry[ params.kitVersion ].param ?: false : false
-
 }
 params.genomeLocationFull = params.genomeLocation+params.genome
 
@@ -128,21 +124,20 @@ process count211 {
   version == '2.1.1'
 
   script:
-  """
-  module load cellranger/2.1.1
-  """
   if (forceCells211 == 0){
-    	"""
-	hostname
-    	ulimit -a
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells211
-    	"""
+    """
+	  hostname
+    ulimit -a
+    module load cellranger/2.1.1
+    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells211
+    """
   } else {
-    	"""
-	hostname
-    	ulimit -a
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells211
-    	"""
+    """
+	  hostname
+    ulimit -a
+    module load cellranger/2.1.1
+    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells211
+    """
   }
 }
 
@@ -168,21 +163,20 @@ process count301 {
   version == '3.0.1'
 
   script:
-  """
-  module load cellranger/3.0.1
-  """
   if (forceCells301 == 0){
-    	"""
-	hostname
-    	ulimit -a
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells301 --chemistry="$chemistryParam301"
-    	"""
+    """
+	  hostname
+    ulimit -a
+    module load cellranger/3.0.1
+    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells301 --chemistry="$chemistryParam301"
+    """
   } else {
-    	"""
-	hostname
-    	ulimit -a
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells301 --chemistry="$chemistryParam301"
-    	"""
+    """
+	  hostname
+    ulimit -a
+    module load cellranger/3.0.1
+    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells301 --chemistry="$chemistryParam301"
+    """
   }
 }
 
@@ -208,20 +202,19 @@ process count302 {
   version == '3.0.2'
 
   script:
-  """
-  module load cellranger/3.0.2
-  """
   if (forceCells302 == 0){
-    	"""
-	hostname
-    	ulimit -a
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells302 --chemistry="$chemistryParam302"
-    	"""
+    """
+	  hostname
+    ulimit -a
+    module load cellranger/3.0.2
+    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells302 --chemistry="$chemistryParam302"
+    """
   } else {
-    	"""
-	hostname
-    	ulimit -a
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells302 --chemistry="$chemistryParam302"
-    	"""
+    """
+	  hostname
+    ulimit -a
+    module load cellranger/3.0.2
+    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells302 --chemistry="$chemistryParam302"
+    """
   }
 }
