@@ -73,6 +73,8 @@ process checkDesignFile {
   script:
 
   """
+  hostname
+  ulimit -a
   module load python/3.6.1-2-anaconda
   python3 $baseDir/scripts/check_design.py -d $designLocation -f $fastqList
   """
@@ -106,7 +108,7 @@ chemistryParam301 = chemistryParam
 chemistryParam302 = chemistryParam
 
 process count211 {
-  memory  '120 GB'
+  queue '128GB,256GB,256GBv1,384GB'
   tag "count211-$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
@@ -131,17 +133,21 @@ process count211 {
   """
   if (forceCells211 == 0){
     	"""
+	hostname
+    	ulimit -a
     	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells211
     	"""
   } else {
     	"""
+	hostname
+    	ulimit -a
     	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells211
     	"""
   }
 }
 
 process count301 {
-  memory  '120 GB'
+  queue '128GB,256GB,256GBv1,384GB'
   tag "count301-$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
@@ -167,17 +173,21 @@ process count301 {
   """
   if (forceCells301 == 0){
     	"""
+	hostname
+    	ulimit -a
     	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells301 --chemistry="$chemistryParam301"
     	"""
   } else {
     	"""
+	hostname
+    	ulimit -a
     	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells301 --chemistry="$chemistryParam301"
     	"""
   }
 }
 
 process count302 {
-  memory  '120 GB'
+  queue '128GB,256GB,256GBv1,384GB'
   tag "count302-$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
@@ -203,10 +213,14 @@ process count302 {
   """
   if (forceCells302 == 0){
     	"""
+	hostname
+    	ulimit -a
     	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells302 --chemistry="$chemistryParam302"
     	"""
   } else {
     	"""
+	hostname
+    	ulimit -a
     	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells302 --chemistry="$chemistryParam302"
     	"""
   }
