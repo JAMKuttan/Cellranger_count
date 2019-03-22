@@ -7,15 +7,33 @@
 params.fastq = "$baseDir/../test_data/*.fastq.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
 params.genome = 'GRCh38-3.0.0'
-params.genomes = []
-params.genomeLocation = params.genome ? params.genomes[ params.genome ].loc ?: false : false
 params.expectCells = 10000
 params.forceCells = 0
-params.kitVersion = '3'
-params.chemistry = []
-params.chemistryParam = params.kitVersion ? params.chemistry[ params.kitVersion ].param ?: false : false
+params.kitVersion = 'three'
 params.version = '3.0.2'
+params.astrocyte = false
 params.outDir = "$baseDir/output"
+
+// Assign variables if astrocyte
+if (params.astrocyte) {
+  print("Running under astrocyte")
+  params.genomeLocation = '/project/apps_database/cellranger/refdata-cellranger-'
+  if (params.kitVersion == "one") {
+    params.chemistryParam ='SC3Pv1'
+  } else if (params.kitVersion == "two") {
+    params.chemistryParam ='SC3Pv2'
+  } else if (params.kitVersion == "three") {
+    params.chemistryParam ='SC3Pv3'
+  } else {
+    params.chemistryParam = 'auto'
+  }
+} else {
+  params.genomes = []
+  params.genomeLocation = params.genome ? params.genomes[ params.genome ].loc ?: false : false
+  params.chemistry = []
+  params.chemistryParam = params.kitVersion ? params.chemistry[ params.kitVersion ].param ?: false : false
+}
+params.genomeLocationFull = params.genomeLocation+params.genome
 
 // Define regular variables
 designLocation = Channel
@@ -27,7 +45,7 @@ fastqList = Channel
   .map { file -> [ file.getFileName().toString(), file.toString() ].join("\t") }
   .collectFile(name: 'fileList.tsv', newLine: true)
 refLocation = Channel
-  .fromPath(params.genomeLocation+params.genome)
+  .fromPath(params.genomeLocationFull)
   .ifEmpty { exit 1, "referene not found: ${params.genome}" }
 expectCells = params.expectCells
 forceCells = params.forceCells
@@ -51,6 +69,9 @@ process checkDesignFile {
   script:
 
   """
+  hostname
+  ulimit -a
+  module load python/3.6.1-2-anaconda
   python3 $baseDir/scripts/check_design.py -d $designLocation -f $fastqList
   """
 }
@@ -83,6 +104,7 @@ chemistryParam301 = chemistryParam
 chemistryParam302 = chemistryParam
 
 process count211 {
+  queue '128GB,256GB,256GBv1,384GB'
   tag "count211-$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
@@ -103,17 +125,24 @@ process count211 {
 
   script:
   if (forceCells211 == 0){
-    	"""
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells211
-    	"""
+    """
+	  hostname
+    ulimit -a
+    module load cellranger/2.1.1
+    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells211
+    """
   } else {
-    	"""
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells211
-    	"""
+    """
+	  hostname
+    ulimit -a
+    module load cellranger/2.1.1
+    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells211
+    """
   }
 }
 
 process count301 {
+  queue '128GB,256GB,256GBv1,384GB'
   tag "count301-$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
@@ -135,17 +164,24 @@ process count301 {
 
   script:
   if (forceCells301 == 0){
-    	"""
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells301 --chemistry="$chemistryParam301"
-    	"""
+    """
+	  hostname
+    ulimit -a
+    module load cellranger/3.0.1
+    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells301 --chemistry="$chemistryParam301"
+    """
   } else {
-    	"""
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells301 --chemistry="$chemistryParam301"
-    	"""
+    """
+	  hostname
+    ulimit -a
+    module load cellranger/3.0.1
+    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells301 --chemistry="$chemistryParam301"
+    """
   }
 }
 
 process count302 {
+  queue '128GB,256GB,256GBv1,384GB'
   tag "count302-$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
@@ -167,12 +203,18 @@ process count302 {
 
   script:
   if (forceCells302 == 0){
-    	"""
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells302 --chemistry="$chemistryParam302"
-    	"""
+    """
+	  hostname
+    ulimit -a
+    module load cellranger/3.0.2
+    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells302 --chemistry="$chemistryParam302"
+    """
   } else {
-    	"""
-    	cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells302 --chemistry="$chemistryParam302"
-    	"""
+    """
+	  hostname
+    ulimit -a
+    module load cellranger/3.0.2
+    cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells302 --chemistry="$chemistryParam302"
+    """
   }
 }

@@ -1,0 +1,4 @@
+Sample,fastq_R1,fastq_R2
+sample1,pbmc_1k_v2_S1_L001_R1_001.fastq.gz,pbmc_1k_v2_S1_L001_R2_001.fastq.gz
+sample2,pbmc_1k_v2_S2_L001_R1_001.fastq.gz,pbmc_1k_v2_S2_L001_R2_001.fastq.gz
+sample2,pbmc_1k_v2_S2_L002_R1_001.fastq.gz,pbmc_1k_v2_S2_L002_R2_001.fastq.gz
