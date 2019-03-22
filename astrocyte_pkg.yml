@@ -137,7 +137,7 @@ workflow_parameters:
       - [ 'two', '2']
     required: true
     description: |
-      10x single cell gene expression chemistry version (only used in cellranger version 2.x).
+      10x single cell gene expression chemistry version (only used in cellranger version 3.x).
 
   - id: version
     type: select
@@ -151,10 +151,11 @@ workflow_parameters:
       10x cellranger version.
 
   - id: astrocyte
-    type: string
-    default: 'true'
+    type: select
+    choices:
+      - [ 'true', 'true' ]
     required: true
-    regex: 'true'
+    default: 'true'
     description: |
       Ensure configuraton for astrocyte.
 
