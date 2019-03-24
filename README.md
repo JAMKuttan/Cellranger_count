@@ -19,13 +19,14 @@ To Run:
   * **--fastq**
         * path to the fastq location
         * R1 and R2 only necessary but can include I2
+        * only fastq's in designFile (see below) are used, not present will be ignored
         * eg: **--fastq '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/v3s2r100k/\*.fastq.gz'**
   * **--designFile**
         * path to design file (csv format) location
         * column 1 = "Sample"
         * column 2 = "fastq_R1"
         * column 3 = "fastq_R2"
-        * can have repeated "Sample" if there are multiole fastq R1/R2 pairs for the samples
+        * can have repeated "Sample" if there are multiple fastq R1/R2 pairs for the samples
         * eg: **--designFile '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/v3s2r100k/design.csv'**
     * **--genome**
         * reference genome
@@ -44,7 +45,7 @@ To Run:
         * eg: **--genome 'GRCh38-3.0.0'**
     * **--genomeLocationFull**
         * path to a custom genome
-        * if --genomeLocationFull is used --genome is not necessary and is overwritten
+        * if --genomeLocationFull is used --genome is not necessary and is ignored
         * eg. **--genomeLocationFull '/project/apps_database/cellranger/refdata-cellranger-GRCh38-3.0.0'**
     * **--expectCells**
         * expected number of cells to be detected
@@ -57,11 +58,11 @@ To Run:
     * **--forceCells**
         * forces filtering of the top number of cells matching this parameter
         * 0-10000
-        * if --forceCells is used then --expectedCells is not necessary and is overwritten
+        * if --forceCells is used then --expectedCells is not necessary and is ignored
         * eg: **--forceCells 10000**
     * **--kitVersion**
         * the library chemistry version number for the 10x Genomics Gene Expression kit
-        * setting to auto will attempt to autodetect from the detected cycle strategy in the fastq's
+        * setting to auto will attempt to autodetect from the detected sequencing strategy in the fastq's
         * version numbers are spelled out
         * --kitversion is only used if --version (cellranger version) is > 2
         * --version (cellranger version) 2.1.1 can only read --kitVersion of two (2)
@@ -69,7 +70,7 @@ To Run:
             * *'auto'*
             * *'three'*
             * *'two'*
-        * eg: **--kitVersion 'three'**'
+        * eg: **--kitVersion 'three'**
     * **--version**
         * cellranger version
         * --version (cellranger version) 2.1.1 can only read --kitVersion of two (2)
