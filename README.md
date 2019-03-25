@@ -1,5 +1,9 @@
+|*master*|*develop*|
+|:-:|:-:|
+|[![Build Status](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/badges/master/build.svg)](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/commits/master)|[![Build Status](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/badges/develop/build.svg)](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/commits/develop)|
+
 10x Genomics scRNA-Seq (cellranger) count Pipeline
-========================================
+==================================================
 
 Introduction
 ------------
