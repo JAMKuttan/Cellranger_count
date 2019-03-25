@@ -1,5 +1,5 @@
 10x Genomics scRNA-Seq (cellranger) count Pipeline
-========================================
+==================================================
 
 Introduction
 ------------
@@ -67,7 +67,7 @@ To Run:
 
 
 Credits
-------------
+-------
 This worklow is was developed jointly with the [Bioinformatic Core Facility (BICF), Department of Bioinformatics](http://www.utsouthwestern.edu/labs/bioinformatics/)
 
 
