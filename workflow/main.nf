@@ -188,7 +188,7 @@ process count302 {
 
   input:
 
-  set sample, file("${sample}_S1_L00?_R1_001.fastq.gz"), file("${sample}_S1_L00?_R2_001.fastq.gz") from samples302
+  set sample, file("${sample}_S?_L001_R1_001.fastq.gz"), file("${sample}_S?_L001_R2_001.fastq.gz") from samples302
   file ref from refLocation302.first()
   expectCells302
   forceCells302
