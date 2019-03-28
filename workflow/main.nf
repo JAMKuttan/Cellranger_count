@@ -105,7 +105,7 @@ chemistryParam302 = chemistryParam
 
 process count211 {
   queue '128GB,256GB,256GBv1,384GB'
-  tag "count211-$sample"
+  tag "$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
 
@@ -143,7 +143,7 @@ process count211 {
 
 process count301 {
   queue '128GB,256GB,256GBv1,384GB'
-  tag "count301-$sample"
+  tag "$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
 
@@ -182,7 +182,7 @@ process count301 {
 
 process count302 {
   queue '128GB,256GB,256GBv1,384GB'
-  tag "count302-$sample"
+  tag "$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
 
