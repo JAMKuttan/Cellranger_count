@@ -105,7 +105,7 @@ chemistryParam302 = chemistryParam
 
 process count211 {
   queue '128GB,256GB,256GBv1,384GB'
-  tag "count211-$sample"
+  tag "$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
 
@@ -143,7 +143,7 @@ process count211 {
 
 process count301 {
   queue '128GB,256GB,256GBv1,384GB'
-  tag "count301-$sample"
+  tag "$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
 
@@ -182,13 +182,13 @@ process count301 {
 
 process count302 {
   queue '128GB,256GB,256GBv1,384GB'
-  tag "count302-$sample"
+  tag "$sample"
 
   publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
 
-  set sample, file("${sample}_S1_L00?_R1_001.fastq.gz"), file("${sample}_S1_L00?_R2_001.fastq.gz") from samples302
+  set sample, file("${sample}_S?_L001_R1_001.fastq.gz"), file("${sample}_S?_L001_R2_001.fastq.gz") from samples302
   file ref from refLocation302.first()
   expectCells302
   forceCells302
