@@ -2,6 +2,9 @@
 |:-:|:-:|
 |[![Build Status](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/badges/master/build.svg)](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/commits/master)|[![Build Status](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/badges/develop/build.svg)](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/commits/develop)|
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2652622.svg)](https://doi.org/10.5281/zenodo.2652622)
+
+
 10x Genomics scRNA-Seq (cellranger) count Pipeline
 ==================================================
 
