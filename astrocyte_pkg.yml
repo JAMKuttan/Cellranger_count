@@ -84,13 +84,13 @@ workflow_parameters:
     required: true
     description: |
       Pairs (read1 and read2) of fastq.gz files from a sequencing of 10x single-cell expereiment. Index fastq not required.
-    regex: ".*fastq.gz"
+    regex: ".*\\.fastq.gz"
     min: 2
 
   - id: designFile
     type: file
     required: true
-    regex: ".*csv"
+    regex: ".*\\.csv"
     description: |
       A design file listing sample, corresponding read1 filename, corresponding read2 filename. There can be multiple rows with the same sample name, if there are multiple fastq's for that sample.
 
