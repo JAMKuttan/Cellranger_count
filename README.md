@@ -31,6 +31,7 @@ To Run:
         * column 2 = "fastq_R1"
         * column 3 = "fastq_R2"
         * can have repeated "Sample" if there are multiple fastq R1/R2 pairs for the samples
+        * can be downloaded [HERE](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/blob/master/docs/design.csv)
         * eg: **--designFile '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/v3s2r100k/design.csv'**
     * **--genome**
         * reference genome
@@ -97,3 +98,5 @@ To Run:
 | sample1 | pbmc_1k_v2_S1_L001_R1_001.fastq.gz | pbmc_1k_v2_S1_L001_R2_001.fastq.gz |
 | sample2 | pbmc_1k_v2_S2_L001_R1_001.fastq.gz | pbmc_1k_v2_S2_L001_R2_001.fastq.gz |
 | sample2 | pbmc_1k_v2_S2_L002_R1_001.fastq.gz | pbmc_1k_v2_S2_L002_R2_001.fastq.gz |
+
+[**CHANGELOG**](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/blob/develop/CHANGELOG.md)
