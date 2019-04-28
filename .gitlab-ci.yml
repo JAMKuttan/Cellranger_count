@@ -33,7 +33,7 @@ run_hu.cr3v2ref3.0.0:
     name: "$CI_JOB_NAME"
     when: always
     paths:
-      - binaries/
+      - .nextflow.log
     expire_in: 2 days
   retry:
     max: 2
@@ -50,7 +50,7 @@ run_mu.cr2v2ref1.2.0:
     name: "$CI_JOB_NAME"
     when: always
     paths:
-      - binaries/
+      - .nextflow.log
     expire_in: 2 days
   retry:
     max: 2
@@ -67,7 +67,7 @@ run_hu.cr3v3ref3.0.0:
     name: "$CI_JOB_NAME"
     when: always
     paths:
-      - binaries/
+      - .nextflow.log
     expire_in: 2 days
   retry:
     max: 2
