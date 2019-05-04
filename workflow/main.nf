@@ -57,7 +57,7 @@ outDir = params.outDir
 
 process checkDesignFile {
 
-  publishDir "$outDir/${task.process}/$name", mode: 'copy'
+  publishDir "$outDir/misc/${task.process}/$name", mode: 'copy'
 
   input:
 
