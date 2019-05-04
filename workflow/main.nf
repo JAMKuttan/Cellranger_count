@@ -4,6 +4,7 @@
 // Note - $baseDir is the location of this workflow file main.nf
 
 // Define Input variables
+params.name = "run"
 params.fastq = "$baseDir/../test_data/*.fastq.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
 params.genome = 'GRCh38-3.0.0'
@@ -36,6 +37,7 @@ if (params.astrocyte) {
 params.genomeLocationFull = params.genomeLocation+params.genome
 
 // Define regular variables
+name = params.name
 designLocation = Channel
   .fromPath(params.designFile)
   .ifEmpty { exit 1, "design file not found: ${params.designFile}" }
@@ -55,7 +57,7 @@ outDir = params.outDir
 
 process checkDesignFile {
 
-  publishDir "$outDir/${task.process}", mode: 'copy'
+  publishDir "$outDir/misc/${task.process}/$name", mode: 'copy'
 
   input:
 
