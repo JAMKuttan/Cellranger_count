@@ -58,6 +58,7 @@ outDir = params.outDir
 process checkDesignFile {
 
   publishDir "$outDir/misc/${task.process}/$name", mode: 'copy'
+  module 'python/3.6.1-2-anaconda'
 
   input:
 
@@ -73,7 +74,6 @@ process checkDesignFile {
   """
   hostname
   ulimit -a
-  module load python/3.6.1-2-anaconda
   python3 $baseDir/scripts/check_design.py -d $designLocation -f $fastqList
   """
 }
@@ -108,8 +108,8 @@ chemistryParam302 = chemistryParam
 process count211 {
   queue '128GB,256GB,256GBv1,384GB'
   tag "$sample"
-
   publishDir "$outDir/${task.process}", mode: 'copy'
+  module 'cellranger/2.1.1'
 
   input:
 
@@ -130,14 +130,12 @@ process count211 {
     """
 	  hostname
     ulimit -a
-    module load cellranger/2.1.1
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells211
     """
   } else {
     """
 	  hostname
     ulimit -a
-    module load cellranger/2.1.1
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells211
     """
   }
@@ -146,8 +144,8 @@ process count211 {
 process count301 {
   queue '128GB,256GB,256GBv1,384GB'
   tag "$sample"
-
   publishDir "$outDir/${task.process}", mode: 'copy'
+  module 'cellranger/3.0.1'
 
   input:
 
@@ -169,14 +167,12 @@ process count301 {
     """
 	  hostname
     ulimit -a
-    module load cellranger/3.0.1
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells301 --chemistry="$chemistryParam301"
     """
   } else {
     """
 	  hostname
     ulimit -a
-    module load cellranger/3.0.1
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells301 --chemistry="$chemistryParam301"
     """
   }
@@ -185,8 +181,8 @@ process count301 {
 process count302 {
   queue '128GB,256GB,256GBv1,384GB'
   tag "$sample"
-
   publishDir "$outDir/${task.process}", mode: 'copy'
+  module 'cellranger/3.0.2'
 
   input:
 
@@ -208,14 +204,12 @@ process count302 {
     """
 	  hostname
     ulimit -a
-    module load cellranger/3.0.2
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells302 --chemistry="$chemistryParam302"
     """
   } else {
     """
 	  hostname
     ulimit -a
-    module load cellranger/3.0.2
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells302 --chemistry="$chemistryParam302"
     """
   }
