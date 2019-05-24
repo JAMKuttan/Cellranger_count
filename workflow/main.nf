@@ -130,40 +130,14 @@ process count211 {
     """
 	  hostname
     ulimit -a
-
-    name=`readlink -e $ref`
-    if [ `find \$name -name "* *" | wc -l` -gt 0 ]
-    then echo "Error: Spaces found in Reference Files"
-    echo `find \$name -name "* *"`
-    exit 2
-    fi
-
-    if [ \$(echo "$ref" | tr -d ' ') != "$ref" ]
-    then echo "Error: Spaces found in Reference Files"
-    echo "$ref"
-    exit 2
-    fi
-
+    bash "$baseDir/scripts/filename_check.sh" -r "$ref"
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells211
     """
   } else {
     """
 	  hostname
     ulimit -a
-
-    name=`readlink -e $ref`
-    if [ `find \$name -name "* *" | wc -l` -gt 0 ]
-    then echo "Error: Spaces found in Reference Files"
-    echo `find \$name -name "* *"`
-    exit 2
-    fi
-
-    if [ \$(echo "$ref" | tr -d ' ') != "$ref" ]
-    then echo "Error: Spaces found in Reference Files"
-    echo "$ref"
-    exit 2
-    fi
-
+    bash "$baseDir/scripts/filename_check.sh" -r "$ref"
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells211
     """
   }
@@ -195,40 +169,14 @@ process count301 {
     """
 	  hostname
     ulimit -a
-
-    name=`readlink -e $ref`
-    if [ `find \$name -name "* *" | wc -l` -gt 0 ]
-    then echo "Error: Spaces found in Reference Files"
-    echo `find \$name -name "* *"`
-    exit 2
-    fi
-
-    if [ \$(echo "$ref" | tr -d ' ') != "$ref" ]
-    then echo "Error: Spaces found in Reference Files"
-    echo "$ref"
-    exit 2
-    fi
-
+    bash "$baseDir/scripts/filename_check.sh" -r "$ref"
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells301 --chemistry="$chemistryParam301"
     """
   } else {
     """
 	  hostname
     ulimit -a
-
-    name=`readlink -e $ref`
-    if [ `find \$name -name "* *" | wc -l` -gt 0 ]
-    then echo "Error: Spaces found in Reference Files"
-    echo `find \$name -name "* *"`
-    exit 2
-    fi
-
-    if [ \$(echo "$ref" | tr -d ' ') != "$ref" ]
-    then echo "Error: Spaces found in Reference Files"
-    echo "$ref"
-    exit 2
-    fi
-
+    bash "$baseDir/scripts/filename_check.sh" -r "$ref"
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells301 --chemistry="$chemistryParam301"
     """
   }
@@ -260,40 +208,14 @@ process count302 {
     """
 	  hostname
     ulimit -a
-
-    name=`readlink -e $ref`
-    if [ `find \$name -name "* *" | wc -l` -gt 0 ]
-    then echo "Error: Spaces found in Reference Files"
-    echo `find \$name -name "* *"`
-    exit 2
-    fi
-
-    if [ \$(echo "$ref" | tr -d ' ') != "$ref" ]
-    then echo "Error: Spaces found in Reference Files"
-    echo "$ref"
-    exit 2
-    fi
-
+    bash "$baseDir/scripts/filename_check.sh" -r "$ref"
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells302 --chemistry="$chemistryParam302"
     """
   } else {
     """
 	  hostname
     ulimit -a
-
-    name=`readlink -e $ref`
-    if [ `find \$name -name "* *" | wc -l` -gt 0 ]
-    then echo "Error: Spaces found in Reference Files"
-    echo `find \$name -name "* *"`
-    exit 2
-    fi
-
-    if [ \$(echo "$ref" | tr -d ' ') != "$ref" ]
-    then echo "Error: Spaces found in Reference Files"
-    echo "$ref"
-    exit 2 
-    fi
-
+    bash "$baseDir/scripts/filename_check.sh" -r "$ref"
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells302 --chemistry="$chemistryParam302"
     """
   }
