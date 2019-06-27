@@ -14,6 +14,8 @@ params.kitVersion = 'three'
 params.version = '3.0.2'
 params.astrocyte = false
 params.outDir = "$baseDir/output"
+params.multiqc = "$baseDir/conf/multiqc_config.yaml"
+params.references = "$baseDir/../docs/references.md"
 
 // Assign variables if astrocyte
 if (params.astrocyte) {
@@ -54,6 +56,8 @@ forceCells = params.forceCells
 chemistryParam = params.chemistryParam
 version = params.version
 outDir = params.outDir
+multiqc = params.multiqc
+references = params.references
 
 process checkDesignFile {
 
@@ -121,6 +125,7 @@ process count211 {
   output:
 
   file("**/outs/**") into outPaths211
+  file("*_metrics_summary.tsv") into metricsSummary211
 
   when:
   version == '2.1.1'
@@ -132,6 +137,7 @@ process count211 {
     ulimit -a
     bash "$baseDir/scripts/filename_check.sh" -r "$ref"
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells211
+    sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
     """
   } else {
     """
@@ -139,6 +145,7 @@ process count211 {
     ulimit -a
     bash "$baseDir/scripts/filename_check.sh" -r "$ref"
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells211
+    sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
     """
   }
 }
@@ -160,6 +167,7 @@ process count301 {
   output:
 
   file("**/outs/**") into outPaths301
+  file("*_metrics_summary.tsv") into metricsSummary301
 
   when:
   version == '3.0.1'
@@ -171,6 +179,7 @@ process count301 {
     ulimit -a
     bash "$baseDir/scripts/filename_check.sh" -r "$ref"
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells301 --chemistry="$chemistryParam301"
+    sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
     """
   } else {
     """
@@ -178,6 +187,7 @@ process count301 {
     ulimit -a
     bash "$baseDir/scripts/filename_check.sh" -r "$ref"
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells301 --chemistry="$chemistryParam301"
+    sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
     """
   }
 }
@@ -199,6 +209,7 @@ process count302 {
   output:
 
   file("**/outs/**") into outPaths302
+  file("*_metrics_summary.tsv") into metricsSummary302
 
   when:
   version == '3.0.2'
@@ -210,6 +221,7 @@ process count302 {
     ulimit -a
     bash "$baseDir/scripts/filename_check.sh" -r "$ref"
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells302 --chemistry="$chemistryParam302"
+    sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
     """
   } else {
     """
@@ -217,6 +229,57 @@ process count302 {
     ulimit -a
     bash "$baseDir/scripts/filename_check.sh" -r "$ref"
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells302 --chemistry="$chemistryParam302"
+    sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
     """
   }
+}
+
+
+process versions {
+  tag "$name"
+  publishDir "$outDir/${task.process}", mode: 'copy'
+  module 'python/3.6.1-2-anaconda:pandoc/2.7:multiqc/1.7'
+
+  input:
+
+  output:
+
+  file("*.yaml") into yamlPaths
+
+  script:
+
+  """
+  hostname
+  ulimit -a
+  echo $workflow.nextflow.version > version_nextflow.txt
+  echo $version > version_cellranger.txt
+  multiqc --version | tr -d 'multiqc, version ' > version_multiqc.txt
+  python3 "$baseDir/scripts/generate_versions.py" -f version_*.txt -o versions
+  python3 "$baseDir/scripts/generate_references.py" -r "$references" -o references
+  """
+}
+
+metricsSummary = metricsSummary211.mix(metricsSummary301, metricsSummary302)
+
+// Generate MultiQC Report
+process multiqcReport {
+  publishDir "$outDir/${task.process}", mode: 'copy'
+
+  input:
+
+  file ('*') from metricsSummary.collect()
+  file yamlPaths
+
+  output:
+
+  file "multiqc_report.html" into multiqcReport
+
+  script:
+
+  """
+  awk 'FNR==1 && NR!=1{next;}{print}' *.tsv > metrics_summary_mqc.tsv
+  sed -i '1s/^.*\tE/Sample\tE/' metrics_summary_mqc.tsv
+  module load multiqc/1.7
+  multiqc -c $multiqc .
+  """
 }

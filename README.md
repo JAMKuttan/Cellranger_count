@@ -27,7 +27,7 @@ To Run:
         * path to the fastq location
         * R1 and R2 only necessary but can include I2
         * only fastq's in designFile (see below) are used, not present will be ignored
-        * eg: **--fastq '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/v3s2r100k/\*.fastq.gz'**
+        * eg: **--fastq '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v3s2r100k/\*.fastq.gz'**
   * **--designFile**
         * path to design file (csv format) location
         * column 1 = "Sample"
@@ -35,7 +35,7 @@ To Run:
         * column 3 = "fastq_R2"
         * can have repeated "Sample" if there are multiple fastq R1/R2 pairs for the samples
         * can be downloaded [HERE](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/blob/master/docs/design.csv)
-        * eg: **--designFile '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/v3s2r100k/design.csv'**
+        * eg: **--designFile '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v3s2r100k/design.csv'**
     * **--genome**
         * reference genome
         * requires workflow/conf/biohpc.config to work
@@ -44,8 +44,8 @@ To Run:
             * *'GRCh38-1.2.0'* = Human GRCh38 release 84
             * *'hg19-3.0.0'* = Human GRCh37 (hg19) release 87
             * *'hg19-1.2.0'* = Human GRCh37 (hg19) release 84
-            * *'mm10-3.0.0'* = Human GRCm38 (mm10) release 93
-            * *'mm10-3.0.0'* = Human GRCm38 (mm10) release 84
+            * *'mm10-3.0.0'* = Mouse GRCm38 (mm10) release 93
+            * *'mm10-3.0.0'* = Mouse GRCm38 (mm10) release 84
             * *'hg19_and_mm10-3.0.0'* = Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 93
             * *'hg19_and_mm10-1.2.0'* = Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 84
             * *'ercc92-1.2.0'* = ERCC.92 Spike-In
@@ -92,7 +92,7 @@ To Run:
         * eg: **--outDir 'test'**
     * FULL EXAMPLE:
 
-**nextflow main.nf --fastq '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/v3s2r100k/\*.fastq.gz' --designFile '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/v3s2r100k/design.csv' --genome 'GRCh38-3.0.0' --kitVersion 'three' --version '3.0.2' --outDir 'test'**
+**nextflow run workflow/main.nf --fastq '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v3s2r100k/\*.fastq.gz' --designFile '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v3s2r100k/design.csv' --genome 'GRCh38-3.0.0' --kitVersion 'three' --version '3.0.2' --outDir 'test'**
 
 * Design example:
 
