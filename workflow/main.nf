@@ -14,7 +14,7 @@ params.kitVersion = 'three'
 params.version = '3.0.2'
 params.astrocyte = false
 params.outDir = "$baseDir/output"
-params.multiqc = "$baseDir/conf/multiqc_config.yaml"
+params.multiqcConf = "$baseDir/conf/multiqc_config.yaml"
 params.references = "$baseDir/../docs/references.md"
 
 // Assign variables if astrocyte
@@ -56,11 +56,11 @@ forceCells = params.forceCells
 chemistryParam = params.chemistryParam
 version = params.version
 outDir = params.outDir
-multiqc = params.multiqc
+multiqcConf = params.multiqc
 references = params.references
 
-process checkDesignFile {
 
+process checkDesignFile {
   publishDir "$outDir/misc/${task.process}/$name", mode: 'copy'
   module 'python/3.6.1-2-anaconda'
 
@@ -81,6 +81,7 @@ process checkDesignFile {
   python3 $baseDir/scripts/check_design.py -d $designLocation -f $fastqList
   """
 }
+
 
 // Parse design file
 samples = designPaths
@@ -109,6 +110,7 @@ forceCells302 = forceCells
 chemistryParam301 = chemistryParam
 chemistryParam302 = chemistryParam
 
+
 process count211 {
   queue '128GB,256GB,256GBv1,384GB'
   tag "$sample"
@@ -125,7 +127,7 @@ process count211 {
   output:
 
   file("**/outs/**") into outPaths211
-  file("*_metrics_summary.tsv") into metricsSummary211
+  file("*_metrics_summary.tsv") into metricsSummary
 
   when:
   version == '2.1.1'
@@ -150,6 +152,7 @@ process count211 {
   }
 }
 
+
 process count301 {
   queue '128GB,256GB,256GBv1,384GB'
   tag "$sample"
@@ -167,7 +170,7 @@ process count301 {
   output:
 
   file("**/outs/**") into outPaths301
-  file("*_metrics_summary.tsv") into metricsSummary301
+  file("*_metrics_summary.tsv") into metricsSummary
 
   when:
   version == '3.0.1'
@@ -192,6 +195,7 @@ process count301 {
   }
 }
 
+
 process count302 {
   queue '128GB,256GB,256GBv1,384GB'
   tag "$sample"
@@ -209,7 +213,7 @@ process count302 {
   output:
 
   file("**/outs/**") into outPaths302
-  file("*_metrics_summary.tsv") into metricsSummary302
+  file("*_metrics_summary.tsv") into metricsSummary
 
   when:
   version == '3.0.2'
@@ -237,7 +241,7 @@ process count302 {
 
 process versions {
   tag "$name"
-  publishDir "$outDir/${task.process}", mode: 'copy'
+  publishDir "$outDir/misc/${task.process}/$name", mode: 'copy'
   module 'python/3.6.1-2-anaconda:pandoc/2.7:multiqc/1.7'
 
   input:
@@ -259,11 +263,11 @@ process versions {
   """
 }
 
-metricsSummary = metricsSummary211.mix(metricsSummary301, metricsSummary302)
 
 // Generate MultiQC Report
-process multiqcReport {
+process multiqc {
   publishDir "$outDir/${task.process}", mode: 'copy'
+  module 'multiqc/1.7'
 
   input:
 
@@ -272,14 +276,15 @@ process multiqcReport {
 
   output:
 
-  file "multiqc_report.html" into multiqcReport
+  file "*" into mqcPaths
 
   script:
 
   """
+  hostname
+  ulimit -a
   awk 'FNR==1 && NR!=1{next;}{print}' *.tsv > metrics_summary_mqc.tsv
   sed -i '1s/^.*\tE/Sample\tE/' metrics_summary_mqc.tsv
-  module load multiqc/1.7
-  multiqc -c $multiqc .
+  multiqc -c $multiqcConf
   """
 }
