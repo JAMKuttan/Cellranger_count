@@ -61,20 +61,18 @@ references = params.references
 
 
 process checkDesignFile {
+  tag "$name"
   publishDir "$outDir/misc/${task.process}/$name", mode: 'copy'
   module 'python/3.6.1-2-anaconda'
 
   input:
-
   file designLocation
   file fastqList
 
   output:
-
   file("design.checked.csv") into designPaths
 
   script:
-
   """
   hostname
   ulimit -a
@@ -118,14 +116,12 @@ process count211 {
   module 'cellranger/2.1.1'
 
   input:
-
   set sample, file("${sample}_S1_L00?_R1_001.fastq.gz"), file("${sample}_S1_L00?_R2_001.fastq.gz") from samples211
   file ref from refLocation211.first()
   expectCells211
   forceCells211
 
   output:
-
   file("**/outs/**") into outPaths211
   file("*_metrics_summary.tsv") into metricsSummary211
 
@@ -160,7 +156,6 @@ process count301 {
   module 'cellranger/3.0.1'
 
   input:
-
   set sample, file("${sample}_S1_L00?_R1_001.fastq.gz"), file("${sample}_S1_L00?_R2_001.fastq.gz") from samples301
   file ref from refLocation301.first()
   expectCells301
@@ -168,7 +163,6 @@ process count301 {
   chemistryParam301
 
   output:
-
   file("**/outs/**") into outPaths301
   file("*_metrics_summary.tsv") into metricsSummary301
 
@@ -178,7 +172,7 @@ process count301 {
   script:
   if (forceCells301 == 0){
     """
-	  hostname
+    hostname
     ulimit -a
     bash "$baseDir/scripts/filename_check.sh" -r "$ref"
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --expect-cells=$expectCells301 --chemistry="$chemistryParam301"
@@ -186,7 +180,7 @@ process count301 {
     """
   } else {
     """
-	  hostname
+    hostname
     ulimit -a
     bash "$baseDir/scripts/filename_check.sh" -r "$ref"
     cellranger count --id="$sample" --transcriptome="./$ref" --fastqs=. --sample="$sample" --force-cells=$forceCells301 --chemistry="$chemistryParam301"
@@ -203,7 +197,6 @@ process count302 {
   module 'cellranger/3.0.2'
 
   input:
-
   set sample, file("${sample}_S?_L001_R1_001.fastq.gz"), file("${sample}_S?_L001_R2_001.fastq.gz") from samples302
   file ref from refLocation302.first()
   expectCells302
@@ -211,7 +204,6 @@ process count302 {
   chemistryParam302
 
   output:
-
   file("**/outs/**") into outPaths302
   file("*_metrics_summary.tsv") into metricsSummary302
 
@@ -247,11 +239,9 @@ process versions {
   input:
 
   output:
-
   file("*.yaml") into yamlPaths
 
   script:
-
   """
   hostname
   ulimit -a
@@ -271,16 +261,13 @@ process multiqc {
   module 'multiqc/1.7'
 
   input:
-
   file ('*') from metricsSummary.collect()
   file yamlPaths
 
   output:
-
   file "*" into mqcPaths
 
   script:
-
   """
   hostname
   ulimit -a
