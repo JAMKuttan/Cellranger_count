@@ -257,7 +257,7 @@ metricsSummary = metricsSummary211.mix(metricsSummary301, metricsSummary302)
 
 // Generate MultiQC Report
 process multiqc {
-  publishDir "$outDir/${task.process}", mode: 'copy'
+  publishDir "$outDir/${task.process}/$name", mode: 'copy'
   module 'multiqc/1.7'
 
   input:
@@ -265,7 +265,7 @@ process multiqc {
   file yamlPaths
 
   output:
-  file "*" into mqcPaths
+  file "multiqc_report.html" into mqcPaths
 
   script:
   """
