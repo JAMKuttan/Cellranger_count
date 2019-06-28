@@ -56,7 +56,7 @@ forceCells = params.forceCells
 chemistryParam = params.chemistryParam
 version = params.version
 outDir = params.outDir
-multiqcConf = params.multiqc
+multiqcConf = params.multiqcConf
 references = params.references
 
 
@@ -286,6 +286,6 @@ process multiqc {
   ulimit -a
   awk 'FNR==1 && NR!=1{next;}{print}' *.tsv > metrics_summary_mqc.tsv
   sed -i '1s/^.*\tE/Sample\tE/' metrics_summary_mqc.tsv
-  multiqc -c $multiqcConf
+  multiqc -c $multiqcConf .
   """
 }

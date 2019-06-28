@@ -54,3 +54,9 @@ table_columns_visible:
     Reads Mapped Confidently to Exonic Regions: False
 
 thousandsSep_format: ''
+
+report_section_order:
+    Software_Versions:
+      order: -1100
+    Software_References:
+      order: -1200
