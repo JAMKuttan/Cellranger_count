@@ -1,5 +1,6 @@
 # v1.1.0 (in development)
 **User Facing**
+* Make report (multiqc) for cellranger qc output, version, references
 
 **Background**
 * Add changelog
