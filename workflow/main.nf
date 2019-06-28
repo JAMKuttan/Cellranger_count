@@ -127,7 +127,7 @@ process count211 {
   output:
 
   file("**/outs/**") into outPaths211
-  file("*_metrics_summary.tsv") into metricsSummary
+  file("*_metrics_summary.tsv") into metricsSummary211
 
   when:
   version == '2.1.1'
@@ -170,7 +170,7 @@ process count301 {
   output:
 
   file("**/outs/**") into outPaths301
-  file("*_metrics_summary.tsv") into metricsSummary
+  file("*_metrics_summary.tsv") into metricsSummary301
 
   when:
   version == '3.0.1'
@@ -213,7 +213,7 @@ process count302 {
   output:
 
   file("**/outs/**") into outPaths302
-  file("*_metrics_summary.tsv") into metricsSummary
+  file("*_metrics_summary.tsv") into metricsSummary302
 
   when:
   version == '3.0.2'
@@ -263,6 +263,7 @@ process versions {
   """
 }
 
+metricsSummary = metricsSummary211.mix(metricsSummary301, metricsSummary302)
 
 // Generate MultiQC Report
 process multiqc {
