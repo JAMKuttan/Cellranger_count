@@ -1,8 +1,4 @@
-#
-# * --------------------------------------------------------------------------
-# * Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/LICENSE.md)
-# * --------------------------------------------------------------------------
-#
+#!/usr/bin/env python3
 
 '''Make header for HTML of references.'''
 

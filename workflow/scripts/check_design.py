@@ -39,13 +39,14 @@ def get_args():
 
 
 def check_design_headers(design):
-    '''Check if design file conforms to sequencing type.'''
+    '''Check if design file contains correct headers.'''
 
     # Default headers
     design_template = [
         'Sample',
-	    'fastq_R1',
-	    'fastq_R2']
+	'fastq_R1',
+	'fastq_R2',
+        ]
 
     design_headers = list(design.columns.values)
 
