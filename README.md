@@ -91,9 +91,9 @@ To Run:
     * optional output directory for run
     * eg: **--outDir 'test'**
 * FULL EXAMPLE:
-
-**nextflow run workflow/main.nf --fastq '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v3s2r100k/\*.fastq.gz' --designFile '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v3s2r100k/design.csv' --genome 'GRCh38-3.0.0' --kitVersion 'three' --version '3.0.2' --outDir 'test'**
-
+  ```
+  nextflow run workflow/main.nf --fastq '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v3s2r100k/*.fastq.gz' --designFile '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v3s2r100k/design.csv' --genome 'GRCh38-3.0.0' --kitVersion 'three' --version '3.0.2' --outDir 'test'
+  ```
 * Design example:
 
 | Sample  | fastq_R1                           | fastq_R2                           |
