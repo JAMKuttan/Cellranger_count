@@ -7,5 +7,6 @@
 * Add check for space in genomeLocationFull (cellranger cannot handle) in bash script
 * Move module loads to process setup level code
 * Add Jeremy Mathews to author list
+* Apply style guide
 
 *Known Bugs*
