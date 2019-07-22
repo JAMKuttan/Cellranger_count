@@ -1,6 +1,7 @@
 before_script:
   - module load astrocyte
   - module load python/3.6.1-2-anaconda
+  - pip install --user pytest-pythonpath==0.7.1 pytest-cov==2.5.1
   - module load nextflow/0.31.1_Ignite
   - mkdir test_data/hu.v2s1r500
   - mkdir -p test_data/mu.v2s2r10k
@@ -29,10 +30,7 @@ run_hu.cr3v2ref3.0.0:
   stage: simple
   script:
   - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/hu.v2s1r500/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/hu.v2s1r500/design.csv" --genome 'GRCh38-3.0.0' --kitVersion 'two' --version '3.0.2'
-  - pytest -m design
   - pytest -m count302
-  - pytest -m versions
-  - pytest -m multiqc
   artifacts:
     name: "$CI_JOB_NAME"
     when: always
@@ -50,10 +48,7 @@ run_mu.cr2v2ref1.2.0:
     - tags
   script:
   - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/mu.v2s2r10k/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/mu.v2s2r10k/design.csv" --genome 'mm10-1.2.0' --kitVersion 'auto' --version '2.1.1'
-  - pytest -m design
   - pytest -m count211
-  - pytest -m versions
-  - pytest -m multiqc
   artifacts:
     name: "$CI_JOB_NAME"
     when: always
@@ -71,10 +66,7 @@ run_hu.cr3v3ref3.0.0:
     - tags
   script:
   -  nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/hu.v3s2r10k/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/hu.v3s2r10k/design.csv" --genome 'GRCh38-3.0.0' --kitVersion 'auto' --version '3.0.2'
-  - pytest -m design
   - pytest -m count302
-  - pytest -m versions
-  - pytest -m multiqc
   artifacts:
     name: "$CI_JOB_NAME"
     when: always

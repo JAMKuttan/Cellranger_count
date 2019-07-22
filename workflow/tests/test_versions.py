@@ -6,9 +6,14 @@ from io import StringIO
 import os
 
 test_output_path = os.path.dirname(os.path.abspath(__file__)) + \
-                '/../output/misc/versions/**/'
+                '/../output/misc/versions/run/'
 
-@pytest.mark.versions
-def test_versions():
+@pytest.mark.count211
+def test_count211_versions():
+    assert os.path.exists(os.path.join(test_output_path, 'versions_mqc.yaml'))
+    assert os.path.exists(os.path.join(test_output_path, 'references_mqc.yaml'))
+
+@pytest.mark.count302
+def test_count302_versions():
     assert os.path.exists(os.path.join(test_output_path, 'versions_mqc.yaml'))
     assert os.path.exists(os.path.join(test_output_path, 'references_mqc.yaml'))
