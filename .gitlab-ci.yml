@@ -111,7 +111,7 @@ detailed_2:
 detailed_3:
   stage: detailed
   only:
-    - branches
+    - merge_requests
   script:
   - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/hu.v2s2r10k/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/hu.v2s2r10k/design.csv" --genome 'GRCh38-1.2.0' --kitVersion 'two' --version '2.1.1'
   - pytest -m count211
