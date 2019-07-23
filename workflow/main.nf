@@ -137,6 +137,7 @@ process count211 {
       """
       hostname
       ulimit -a
+      module list
       bash ${baseDir}/scripts/filename_check.sh -r ${ref}
       cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --expect-cells=${expectCells211}
       sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
@@ -146,6 +147,7 @@ process count211 {
       """
       hostname
       ulimit -a
+      module list
       bash ${baseDir}/scripts/filename_check.sh -r ${ref}
       cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --force-cells=${forceCells211}
       sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
