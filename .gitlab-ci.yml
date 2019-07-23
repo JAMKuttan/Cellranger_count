@@ -32,8 +32,10 @@ astrocyte_check:
 
 simple_1:
   stage: simple
-  only: branches
-  except: master
+  only:
+    - branches
+  except:
+    - master
   script:
   - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/hu.v3s1r500/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/hu.v3s1r500/design.csv" --genome 'GRCh38-3.0.0' --kitVersion 'three' --version '3.0.2'
   - pytest -m count302
@@ -50,8 +52,10 @@ simple_1:
 
 simple_2:
   stage: simple
-  only: branches
-  except: master
+  only:
+    - branches
+  except:
+    - master
   script:
   - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/mu.v3s1r500/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/mu.v3s1r500/design.csv" --genome 'mm10-3.0.0' --kitVersion 'three' --version '3.0.1'
   - pytest -m count301
@@ -68,8 +72,10 @@ simple_2:
 
 simple_3:
   stage: simple
-  only: branches
-  except: master
+  only:
+    - branches
+  except:
+    - master
   script:
   - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/hu.v2s1r500/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/hu.v2s1r500/design.csv" --genome 'GRCh38-1.2.0' --kitVersion 'two' --version '2.1.1'
   - pytest -m count211
@@ -86,7 +92,8 @@ simple_3:
 
 detailed_1:
   stage: detailed
-  only: master
+  only:
+    - master
   except:
     - tags
   script:
@@ -105,7 +112,8 @@ detailed_1:
 
 detailed_2:
   stage: detailed
-  only: master
+  only:
+    - master
   except:
     - tags
   script:
