@@ -14,6 +14,11 @@ def test_count211_count():
     assert os.path.exists(os.path.join(test_output_path, 'count211', 'sample1_metrics_summary.tsv'))
     assert os.path.exists(os.path.join(test_output_path, 'count211', 'sample1', 'outs'))
 
+@pytest.mark.count301
+def test_count301_count():
+    assert os.path.exists(os.path.join(test_output_path, 'count301', 'sample1_metrics_summary.tsv'))
+    assert os.path.exists(os.path.join(test_output_path, 'count301', 'sample1', 'outs'))
+
 @pytest.mark.count302
 def test_count302_count():
     assert os.path.exists(os.path.join(test_output_path, 'count302', 'sample1_metrics_summary.tsv'))
