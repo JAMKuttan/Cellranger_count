@@ -125,4 +125,3 @@ detailed_3:
     max: 1
     when:
       - always
-
