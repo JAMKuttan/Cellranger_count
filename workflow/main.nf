@@ -19,7 +19,7 @@ params.references = "${baseDir}/../docs/references.md"
 
 if (params.kitVersion == "three" && params.version == '2.1.1') {
   print("Cellranger Version 2.1.1 requires kitVersion 2")
-  System.exit(3)	
+  System.exit(32)	
 }
 
 // Assign variables if astrocyte
