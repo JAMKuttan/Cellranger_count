@@ -5,14 +5,14 @@ before_script:
   - module load nextflow/0.31.1_Ignite
   - mkdir test_data/hu.v3s1r500
   - mkdir test_data/mu.v3s1r500
-  - mkdir test_data/hu.v2s1r500
   - mkdir test_data/hu.v3s2r10k
   - mkdir test_data/mu.v3s2r10k
+  - mkdir test_data/hu.v2s2r10k
   - ln -sfn /project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v3s1r500/* test_data/hu.v3s1r500/
   - ln -sfn /project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/mu.v3s1r500/* test_data/mu.v3s1r500/
-  - ln -sfn /project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v2s1r500/* test_data/hu.v2s1r500/
   - ln -sfn /project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v3s2r10k/* test_data/hu.v3s2r10k/
   - ln -sfn /project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/mu.v3s2r10k/* test_data/mu.v3s2r10k/
+  - ln -sfn /project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v2s2r10k/* test_data/hu.v2s2r10k/
 
 stages:
   - astrocyte
