@@ -77,7 +77,7 @@ simple_3:
   except:
     - master
   script:
-  - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/hu.v2s1r500/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/hu.v2s1r500/design.csv" --genome 'GRCh38-1.2.0' --kitVersion 'two' --version '2.1.1' --astrocyte 'true'
+  - nextflow run workflow/main.nf --fastq "$CI_PROJECT_DIR/test_data/hu.v2s1r500/*.fastq.gz" --designFile "$CI_PROJECT_DIR/test_data/hu.v2s1r500/design.csv" --genome 'GRCh38-1.2.0' --kitVersion 'two' --version '2.1.1'
   - pytest -m count211
   artifacts:
     name: "$CI_JOB_NAME"
