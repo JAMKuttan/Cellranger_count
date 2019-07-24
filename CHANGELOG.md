@@ -1,4 +1,12 @@
-# v1.1.0 (in development)
+# v1.2.0 (in development)
+**User Facing**
+
+**Background**
+
+*Known Bugs*
+
+
+# v1.1.0
 **User Facing**
 * Make report (multiqc) for cellranger qc output, version, references
 
