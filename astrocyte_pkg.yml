@@ -9,7 +9,7 @@
 # A unique identifier for the workflow package, text/underscores only
 name: 'cellranger_count'
 # Who wrote this?
-author: 'Gervaise Henry and Venkat Malladi'
+author: 'Gervaise H. Henry, Jeremy Mathews, and Venkat Malladi'
 # A contact email address for questions
 email: 'bicf@utsouthwestern.edu'
 # A more informative title for the workflow package
@@ -44,6 +44,7 @@ workflow_modules:
   - 'cellranger/3.0.1'
   - 'cellranger/3.0.2'
   - 'bcl2fastq/2.17.1.14'
+  - 'multiqc/1.7'
 
 # A list of parameters used by the workflow, defining how to present them,
 # options etc in the web interface. For each parameter:
@@ -84,28 +85,28 @@ workflow_parameters:
     required: true
     description: |
       Pairs (read1 and read2) of fastq.gz files from a sequencing of 10x single-cell expereiment. Index fastq not required.
-    regex: ".*fastq.gz"
+    regex: ".*\\.fastq.gz"
     min: 2
 
   - id: designFile
     type: file
     required: true
-    regex: ".*csv"
+    regex: ".*\\.csv"
     description: |
       A design file listing sample, corresponding read1 filename, corresponding read2 filename. There can be multiple rows with the same sample name, if there are multiple fastq's for that sample.
 
   - id: genome
     type: select
     choices:
-      - [ 'GRCh38-3.0.0', 'Human GRCh38 release 93']
-      - [ 'GRCh38-1.2.0', 'Human GRCh38 release 84']
-      - [ 'hg19-3.0.0', 'Human GRCh37 (hg19) release 87']
-      - [ 'hg19-1.2.0', 'Human GRCh37 (hg19) release 84']
-      - [ 'mm10-3.0.0', 'Mouse GRCm38 (mm10) release 93']
-      - [ 'mm10-1.2.0', 'Mouse GRCm38 (mm10) release 84']
-      - [ 'hg19_and_mm10-3.0.0', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 93']
-      - [ 'hg19_and_mm10-1.2.0', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 84']
-      - [ 'ercc92-1.2.0', 'ERCC.92 Spike-In']
+      - ['GRCh38-3.0.0', 'Human GRCh38 release 93']
+      - ['GRCh38-1.2.0', 'Human GRCh38 release 84']
+      - ['hg19-3.0.0', 'Human GRCh37 (hg19) release 87']
+      - ['hg19-1.2.0', 'Human GRCh37 (hg19) release 84']
+      - ['mm10-3.0.0', 'Mouse GRCm38 (mm10) release 93']
+      - ['mm10-1.2.0', 'Mouse GRCm38 (mm10) release 84']
+      - ['hg19_and_mm10-3.0.0', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 93']
+      - ['hg19_and_mm10-1.2.0', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 84']
+      - ['ercc92-1.2.0', 'ERCC.92 Spike-In']
     required: true
     description: |
       Reference species and genome used for alignment and subsequent analysis.
@@ -132,9 +133,9 @@ workflow_parameters:
     type: select
     default: 'auto'
     choices:
-      - [ 'auto', 'Auto Detect']
-      - [ 'three', '3']
-      - [ 'two', '2']
+      - ['auto', 'Auto Detect']
+      - ['three', '3']
+      - ['two', '2']
     required: true
     description: |
       10x single cell gene expression chemistry version (only used in cellranger version 3.x).
@@ -143,9 +144,9 @@ workflow_parameters:
     type: select
     default: '3.0.2'
     choices:
-      - [ '3.0.2', '3.0.2']
-      - [ '3.0.1', '3.0.1']
-      - [ '2.1.1', '2.1.1']
+      - ['3.0.2', '3.0.2']
+      - ['3.0.1', '3.0.1']
+      - ['2.1.1', '2.1.1']
     required: true
     description: |
       10x cellranger version.
