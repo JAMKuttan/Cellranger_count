@@ -8,5 +8,7 @@
 * Move module loads to process setup level code
 * Add Jeremy Mathews to author list
 * Apply style guide
+* Add pytests for ouptuts
+* Test for incompatible params (kitVersion=3 AND version=2.1.1)
 
 *Known Bugs*
