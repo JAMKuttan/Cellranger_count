@@ -17,6 +17,11 @@ params.outDir = "${baseDir}/output"
 params.multiqcConf = "${baseDir}/conf/multiqc_config.yaml"
 params.references = "${baseDir}/../docs/references.md"
 
+if (params.kitVersion == "three" && params.version == '2.1.1') {
+  print("Cellranger Version 2.1.1 requires kitVersion 2")
+  System.exit(32)	
+}
+
 // Assign variables if astrocyte
 if (params.astrocyte) {
   print("Running under astrocyte")
@@ -58,7 +63,6 @@ version = params.version
 outDir = params.outDir
 multiqcConf = params.multiqcConf
 references = params.references
-
 
 process checkDesignFile {
 
