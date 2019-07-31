@@ -46,8 +46,9 @@ To Run:
         * *'hg19-1.2.0'* = Human GRCh37 (hg19) release 84
         * *'mm10-3.0.0'* = Mouse GRCm38 (mm10) release 93
         * *'mm10-3.0.0'* = Mouse GRCm38 (mm10) release 84
-        * *'hg19_and_mm10-3.0.0'* = Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 93
-        * *'hg19_and_mm10-1.2.0'* = Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 84
+        * *'GRCh38_and_mm10-3.1.0'* = Human GRCh38 + Mouse GRCm38 (mm10) release 93
+        * *'hg19_and_mm10-3.0.0'* = Human GRCh37 (hg19) + Mouse GRCm38 (mm10) release 93
+        * *'hg19_and_mm10-1.2.0'* = Human GRCh37 (hg19) + Mouse GRCm38 (mm10) release 84
         * *'ercc92-1.2.0'* = ERCC.92 Spike-In
     * if --genome is used then --genomeLocationFull is not necessary
     * eg: **--genome 'GRCh38-3.0.0'**
@@ -83,16 +84,17 @@ To Run:
     * cellranger version
     * --version (cellranger version) 2.1.1 can only read --kitVersion of two (2)
     * options:
+        * *'3.1.0'*
         * *'3.0.2'*
         * *'3.0.1'*
         * *'2.1.1'*
-    * eg: **--version '3.0.2'**
+    * eg: **--version '3.1.0'**
   * **--outDir**
     * optional output directory for run
     * eg: **--outDir 'test'**
 * FULL EXAMPLE:
   ```
-  nextflow run workflow/main.nf --fastq '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v3s2r100k/*.fastq.gz' --designFile '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v3s2r100k/design.csv' --genome 'GRCh38-3.0.0' --kitVersion 'three' --version '3.0.2' --outDir 'test'
+  nextflow run workflow/main.nf --fastq '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v3s2r100k/*.fastq.gz' --designFile '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_count/hu.v3s2r100k/design.csv' --genome 'GRCh38-3.0.0' --kitVersion 'three' --version '3.1.0' --outDir 'test'
   ```
 * Design example:
 

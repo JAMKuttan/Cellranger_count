@@ -22,3 +22,8 @@ def test_count301_versions():
 def test_count302_versions():
     assert os.path.exists(os.path.join(test_output_path, 'versions_mqc.yaml'))
     assert os.path.exists(os.path.join(test_output_path, 'references_mqc.yaml'))
+
+@pytest.mark.count310
+def test_count310_versions():
+    assert os.path.exists(os.path.join(test_output_path, 'versions_mqc.yaml'))
+    assert os.path.exists(os.path.join(test_output_path, 'references_mqc.yaml'))
