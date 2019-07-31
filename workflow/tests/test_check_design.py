@@ -19,3 +19,7 @@ def test_count301_design():
 @pytest.mark.count302
 def test_count302_design():
     assert os.path.exists(os.path.join(test_output_path, 'design.checked.csv'))
+
+@pytest.mark.count310
+def test_count310_design():
+    assert os.path.exists(os.path.join(test_output_path, 'design.checked.csv'))

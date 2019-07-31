@@ -43,6 +43,7 @@ workflow_modules:
   - 'cellranger/2.1.1'
   - 'cellranger/3.0.1'
   - 'cellranger/3.0.2'
+  - 'cellranger/3.1.0'
   - 'bcl2fastq/2.17.1.14'
   - 'multiqc/1.7'
 
@@ -104,8 +105,9 @@ workflow_parameters:
       - ['hg19-1.2.0', 'Human GRCh37 (hg19) release 84']
       - ['mm10-3.0.0', 'Mouse GRCm38 (mm10) release 93']
       - ['mm10-1.2.0', 'Mouse GRCm38 (mm10) release 84']
-      - ['hg19_and_mm10-3.0.0', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 93']
-      - ['hg19_and_mm10-1.2.0', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 84']
+      - ['GRCh38_and_mm10-3.1.0', 'Human GRCh38 + Mouse GRCm38 (mm10) release 93']
+      - ['hg19_and_mm10-3.0.0', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm10) release 93']
+      - ['hg19_and_mm10-1.2.0', 'Human GRCh37 (hg19) + Mouse GRCm38 (mm10) release 84']
       - ['ercc92-1.2.0', 'ERCC.92 Spike-In']
     required: true
     description: |
@@ -142,8 +144,9 @@ workflow_parameters:
 
   - id: version
     type: select
-    default: '3.0.2'
+    default: '3.1.0'
     choices:
+      - ['3.1.0', '3.1.0']
       - ['3.0.2', '3.0.2']
       - ['3.0.1', '3.0.1']
       - ['2.1.1', '2.1.1']

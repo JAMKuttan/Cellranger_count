@@ -1,5 +1,6 @@
 # v1.2.0 (in development)
 **User Facing**
+* Add Cellranger Version 3.1.0
 
 **Background**
 
