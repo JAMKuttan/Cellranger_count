@@ -321,7 +321,7 @@ process versions {
 }
 
 
-metricsSummary = metricsSummary211.mix(metricsSummary301, metricsSummary302)
+metricsSummary = metricsSummary211.mix(metricsSummary301, metricsSummary302, metricsSummary310)
 
 
 // Generate MultiQC Report
