@@ -46,6 +46,8 @@ simple_1:
     when: always
     paths:
       - .nextflow.log
+      - workflow/output/count310/sample1/outs/web_summary.html
+      - workflow/output/multiqc/run/multiqc_report.html
     expire_in: 2 days
   retry:
     max: 1
@@ -68,6 +70,8 @@ simple_2:
     when: always
     paths:
       - .nextflow.log
+      - workflow/output/count310/sample1/outs/web_summary.html
+      - workflow/output/multiqc/run/multiqc_report.html
     expire_in: 2 days
   retry:
     max: 1
@@ -89,6 +93,8 @@ detailed_1:
     when: always
     paths:
       - .nextflow.log
+      - workflow/output/count310/sample1/outs/web_summary.html
+      - workflow/output/multiqc/run/multiqc_report.html
     expire_in: 2 days
   retry:
     max: 1
@@ -111,6 +117,8 @@ detailed_2:
     when: always
     paths:
       - .nextflow.log
+      - workflow/output/count302/sample1/outs/web_summary.html
+      - workflow/output/multiqc/run/multiqc_report.html
     expire_in: 2 days
   retry:
     max: 1
@@ -132,6 +140,8 @@ detailed_3:
     when: always
     paths:
       - .nextflow.log
+      - workflow/output/count301/sample1/outs/web_summary.html
+      - workflow/output/multiqc/run/multiqc_report.html
     expire_in: 2 days
   retry:
     max: 1
@@ -153,6 +163,8 @@ detailed_4:
     when: always
     paths:
       - .nextflow.log
+      - workflow/output/count211/sample1/outs/web_summary.html
+      - workflow/output/multiqc/run/multiqc_report.html
     expire_in: 2 days
   retry:
     max: 1
