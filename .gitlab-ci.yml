@@ -21,9 +21,6 @@ stages:
 
 astrocyte_check:
   stage: astrocyte
-  except:
-    changes:
-      - "**/*.md"
   script:
     - astrocyte_cli check ../cellranger_count
   artifacts:
