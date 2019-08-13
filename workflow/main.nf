@@ -148,7 +148,7 @@ process count211 {
       ulimit -a
       bash ${baseDir}/scripts/filename_check.sh -r ${ref}
       cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --expect-cells=${expectCells211}
-      sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
+      sed -E 's/("([^"]*)")?(,|\$)/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
       """
     } 
     else {
@@ -157,7 +157,7 @@ process count211 {
       ulimit -a
       bash ${baseDir}/scripts/filename_check.sh -r ${ref}
       cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --force-cells=${forceCells211}
-      sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
+      sed -E 's/("([^"]*)")?(,|\$)/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
       """
     }
 
@@ -192,7 +192,7 @@ process count301 {
       ulimit -a
       bash ${baseDir}/scripts/filename_check.sh -r ${ref}
       cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --expect-cells=${expectCells301} --chemistry=${chemistryParam301}
-      sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
+      sed -E 's/("([^"]*)")?(,|\$)/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
       """
     } 
     else {
@@ -201,7 +201,7 @@ process count301 {
       ulimit -a
       bash ${baseDir}/scripts/filename_check.sh -r ${ref}
       cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --force-cells=${forceCells301} --chemistry=${chemistryParam301}
-      sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
+      sed -E 's/("([^"]*)")?(,|\$)/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
       """
     }
 
@@ -236,7 +236,7 @@ process count302 {
       ulimit -a
       bash ${baseDir}/scripts/filename_check.sh -r ${ref}
       cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --expect-cells=${expectCells302} --chemistry=${chemistryParam302}
-      sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
+      sed -E 's/("([^"]*)")?(,|\$)/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
       """
     } 
     else {
@@ -245,7 +245,7 @@ process count302 {
       ulimit -a
       bash ${baseDir}/scripts/filename_check.sh -r ${ref}
       cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --force-cells=${forceCells302} --chemistry=${chemistryParam302}
-      sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
+      sed -E 's/("([^"]*)")?(,|\$)/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
       """
     }
 
@@ -280,7 +280,7 @@ process count310 {
       ulimit -a
       bash ${baseDir}/scripts/filename_check.sh -r ${ref}
       cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --expect-cells=${expectCells310} --chemistry=${chemistryParam310}
-      sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
+      sed -E 's/("([^"]*)")?(,|\$)/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
       """
     }
     else {
@@ -289,7 +289,7 @@ process count310 {
       ulimit -a
       bash ${baseDir}/scripts/filename_check.sh -r ${ref}
       cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --force-cells=${forceCells310} --chemistry=${chemistryParam310}
-      sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
+      sed -E 's/("([^"]*)")?(,|\$)/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
       """
     }
 
