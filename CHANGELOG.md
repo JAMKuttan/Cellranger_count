@@ -2,6 +2,7 @@
 **User Facing**
 * Add Cellranger Version 3.1.0
 * Add CI Artifacts
+* Add Vizapp
 
 **Background**
 
