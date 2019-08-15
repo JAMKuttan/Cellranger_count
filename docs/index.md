@@ -36,8 +36,9 @@ To Run:
         * *'hg19-1.2.0'* = Human GRCh37 (hg19) release 84
         * *'mm10-3.0.0'* = Human GRCm38 (mm10) release 93
         * *'mm10-3.0.0'* = Human GRCm38 (mm10) release 84
-        * *'hg19_and_mm10-3.0.0'* = Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 93
-        * *'hg19_and_mm10-1.2.0'* = Human GRCh37 (hg19) + Mouse GRCm38 (mm19) release 84
+        * *'GRCh38-and-mm10-3.1.0'* = Human GRCh38 + Mouse GRCm38 (mm10) release 93
+        * *'hg19_and_mm10-3.0.0'* = Human GRCh37 (hg19) + Mouse GRCm38 (mm10) release 93
+        * *'hg19_and_mm10-1.2.0'* = Human GRCh37 (hg19) + Mouse GRCm38 (mm10) release 84
         * *'ercc92-1.2.0'* = ERCC.92 Spike-In
   * **expect cells**
         * Expected number of recovered cells.

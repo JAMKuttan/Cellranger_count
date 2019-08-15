@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+#test_multiqc.py
+#*
+#* --------------------------------------------------------------------------
+#* Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/blob/develop/LICENSE)
+#* --------------------------------------------------------------------------
+#*
 
 import pytest
 import pandas as pd
@@ -18,4 +24,8 @@ def test_count301_multiqc():
 
 @pytest.mark.count302
 def test_count302_multiqc():
+    assert os.path.exists(os.path.join(test_output_path, 'multiqc_report.html'))
+
+@pytest.mark.count310
+def test_count310_multiqc():
     assert os.path.exists(os.path.join(test_output_path, 'multiqc_report.html'))

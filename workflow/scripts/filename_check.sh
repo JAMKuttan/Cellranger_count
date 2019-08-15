@@ -1,5 +1,10 @@
 #!/bin/bash
 #filename_check.sh
+#*
+#* --------------------------------------------------------------------------
+#* Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/blob/develop/LICENSE)
+#* --------------------------------------------------------------------------
+#*
 
 usage() {
   echo "-r  --ref file"

@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-'''Make YAML of software versions.'''
+#generate_versions.py
+#*
+#* --------------------------------------------------------------------------
+#* Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/blob/develop/LICENSE)
+#* --------------------------------------------------------------------------
+#*
 
 from __future__ import print_function
 from collections import OrderedDict
@@ -15,7 +18,6 @@ For more details:
         %(prog)s --help
 '''
 
-# SETTINGS
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 logger.propagate = False

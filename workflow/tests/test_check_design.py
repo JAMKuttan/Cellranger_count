@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+#test_check_design.py
+#*
+#* --------------------------------------------------------------------------
+#* Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/blob/develop/LICENSE)
+#* --------------------------------------------------------------------------
+#*
 
 import pytest
 import pandas as pd
@@ -18,4 +24,8 @@ def test_count301_design():
 
 @pytest.mark.count302
 def test_count302_design():
+    assert os.path.exists(os.path.join(test_output_path, 'design.checked.csv'))
+
+@pytest.mark.count310
+def test_count310_design():
     assert os.path.exists(os.path.join(test_output_path, 'design.checked.csv'))

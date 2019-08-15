@@ -1,7 +1,12 @@
 #!/usr/bin/env nextflow
-
-// Path to an input file, or a pattern for multiple inputs
-// Note - $baseDir is the location of this workflow file main.nf
+/*
+main.nf
+*
+* --------------------------------------------------------------------------
+* Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/blob/develop/LICENSE)
+* --------------------------------------------------------------------------
+*
+*/
 
 // Define Input variables
 params.name = "run"
@@ -11,7 +16,7 @@ params.genome = 'GRCh38-3.0.0'
 params.expectCells = 10000
 params.forceCells = 0
 params.kitVersion = 'three'
-params.version = '3.0.2'
+params.version = '3.1.0'
 params.astrocyte = false
 params.outDir = "${baseDir}/output"
 params.multiqcConf = "${baseDir}/conf/multiqc_config.yaml"
@@ -64,6 +69,7 @@ outDir = params.outDir
 multiqcConf = params.multiqcConf
 references = params.references
 
+
 process checkDesignFile {
 
   tag "${name}"
@@ -100,20 +106,25 @@ samples.into {
   samples211
   samples301
   samples302
+  samples310
 }
 refLocation.into {
   refLocation211
   refLocation301
   refLocation302
+  refLocation310
 }
 expectCells211 = expectCells
 expectCells301 = expectCells
 expectCells302 = expectCells
+expectCells310 = expectCells
 forceCells211 = forceCells
 forceCells301 = forceCells
 forceCells302 = forceCells
+forceCells310 = forceCells
 chemistryParam301 = chemistryParam
 chemistryParam302 = chemistryParam
+chemistryParam310 = chemistryParam
 
 
 process count211 {
@@ -143,7 +154,7 @@ process count211 {
       ulimit -a
       bash ${baseDir}/scripts/filename_check.sh -r ${ref}
       cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --expect-cells=${expectCells211}
-      sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
+      sed -E 's/("([^"]*)")?(,|\$)/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
       """
     } 
     else {
@@ -152,7 +163,7 @@ process count211 {
       ulimit -a
       bash ${baseDir}/scripts/filename_check.sh -r ${ref}
       cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --force-cells=${forceCells211}
-      sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
+      sed -E 's/("([^"]*)")?(,|\$)/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
       """
     }
 
@@ -187,7 +198,7 @@ process count301 {
       ulimit -a
       bash ${baseDir}/scripts/filename_check.sh -r ${ref}
       cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --expect-cells=${expectCells301} --chemistry=${chemistryParam301}
-      sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
+      sed -E 's/("([^"]*)")?(,|\$)/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
       """
     } 
     else {
@@ -196,7 +207,7 @@ process count301 {
       ulimit -a
       bash ${baseDir}/scripts/filename_check.sh -r ${ref}
       cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --force-cells=${forceCells301} --chemistry=${chemistryParam301}
-      sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
+      sed -E 's/("([^"]*)")?(,|\$)/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
       """
     }
 
@@ -231,7 +242,7 @@ process count302 {
       ulimit -a
       bash ${baseDir}/scripts/filename_check.sh -r ${ref}
       cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --expect-cells=${expectCells302} --chemistry=${chemistryParam302}
-      sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
+      sed -E 's/("([^"]*)")?(,|\$)/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
       """
     } 
     else {
@@ -240,7 +251,51 @@ process count302 {
       ulimit -a
       bash ${baseDir}/scripts/filename_check.sh -r ${ref}
       cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --force-cells=${forceCells302} --chemistry=${chemistryParam302}
-      sed -E 's/("([^"]*)")?,/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
+      sed -E 's/("([^"]*)")?(,|\$)/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
+      """
+    }
+
+}
+
+
+process count310 {
+
+  queue '128GB,256GB,256GBv1,384GB'
+  tag "${sample}"
+  publishDir "${outDir}/${task.process}", mode: 'copy'
+  module 'cellranger/3.1.0'
+
+  input:
+    set sample, file("${sample}_S?_L001_R1_001.fastq.gz"), file("${sample}_S?_L001_R2_001.fastq.gz") from samples310
+    file ref from refLocation310.first()
+    expectCells310
+    forceCells310
+    chemistryParam310
+
+  output:
+    file("**/outs/**") into outPaths310
+    file("*_metrics_summary.tsv") into metricsSummary310
+
+  when:
+    version == '3.1.0'
+
+  script:
+    if (forceCells310 == 0) {
+      """
+      hostname
+      ulimit -a
+      bash ${baseDir}/scripts/filename_check.sh -r ${ref}
+      cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --expect-cells=${expectCells310} --chemistry=${chemistryParam310}
+      sed -E 's/("([^"]*)")?(,|\$)/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
+      """
+    }
+    else {
+      """
+      hostname
+      ulimit -a
+      bash ${baseDir}/scripts/filename_check.sh -r ${ref}
+      cellranger count --id=${sample} --transcriptome=./${ref} --fastqs=. --sample=${sample} --force-cells=${forceCells310} --chemistry=${chemistryParam310}
+      sed -E 's/("([^"]*)")?(,|\$)/\\2\t/g' ${sample}/outs/metrics_summary.csv | tr -d "," | sed "s/^/${sample}\t/" > ${sample}_metrics_summary.tsv
       """
     }
 
@@ -272,10 +327,9 @@ process versions {
 }
 
 
-metricsSummary = metricsSummary211.mix(metricsSummary301, metricsSummary302)
+metricsSummary = metricsSummary211.mix(metricsSummary301, metricsSummary302, metricsSummary310)
 
 
-// Generate MultiQC Report
 process multiqc {
 
   tag "${name}"

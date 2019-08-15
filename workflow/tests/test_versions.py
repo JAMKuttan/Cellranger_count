@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+#test_versions.py
+#*
+#* --------------------------------------------------------------------------
+#* Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/blob/develop/LICENSE)
+#* --------------------------------------------------------------------------
+#*
 
 import pytest
 import pandas as pd
@@ -20,5 +26,10 @@ def test_count301_versions():
 
 @pytest.mark.count302
 def test_count302_versions():
+    assert os.path.exists(os.path.join(test_output_path, 'versions_mqc.yaml'))
+    assert os.path.exists(os.path.join(test_output_path, 'references_mqc.yaml'))
+
+@pytest.mark.count310
+def test_count310_versions():
     assert os.path.exists(os.path.join(test_output_path, 'versions_mqc.yaml'))
     assert os.path.exists(os.path.join(test_output_path, 'references_mqc.yaml'))
