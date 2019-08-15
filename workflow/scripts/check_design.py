@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
-
-'''Check if design file is correctly formatted and matches files list.'''
+#check_design.py
+#*
+#* --------------------------------------------------------------------------
+#* Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/blob/develop/LICENSE)
+#* --------------------------------------------------------------------------
+#*
 
 import argparse
 import logging
@@ -10,8 +14,6 @@ EPILOG = '''
 For more details:
         %(prog)s --help
 '''
-
-# SETTINGS
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
@@ -60,6 +62,7 @@ def check_design_headers(design):
         raise Exception("Missing column headers: %s" % list(missing_headers))
     
     return design
+
 
 def check_files(design, fastq):
     '''Check if design file has the files found.'''

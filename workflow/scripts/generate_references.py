@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
-
-'''Make header for HTML of references.'''
+#generate_references.py
+#*
+#* --------------------------------------------------------------------------
+#* Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/blob/develop/LICENSE)
+#* --------------------------------------------------------------------------
+#*
 
 import argparse
 import subprocess
@@ -11,8 +15,6 @@ EPILOG = '''
 For more details:
         %(prog)s --help
 '''
-
-# SETTINGS
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())

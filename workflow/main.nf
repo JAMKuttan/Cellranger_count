@@ -1,7 +1,12 @@
 #!/usr/bin/env nextflow
-
-// Path to an input file, or a pattern for multiple inputs
-// Note - $baseDir is the location of this workflow file main.nf
+/*
+main.nf
+*
+* --------------------------------------------------------------------------
+* Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/blob/develop/LICENSE)
+* --------------------------------------------------------------------------
+*
+*/
 
 // Define Input variables
 params.name = "run"
@@ -63,6 +68,7 @@ version = params.version
 outDir = params.outDir
 multiqcConf = params.multiqcConf
 references = params.references
+
 
 process checkDesignFile {
 
@@ -324,7 +330,6 @@ process versions {
 metricsSummary = metricsSummary211.mix(metricsSummary301, metricsSummary302, metricsSummary310)
 
 
-// Generate MultiQC Report
 process multiqc {
 
   tag "${name}"

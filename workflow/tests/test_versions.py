@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+#test_versions.py
+#*
+#* --------------------------------------------------------------------------
+#* Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/blob/develop/LICENSE)
+#* --------------------------------------------------------------------------
+#*
 
 import pytest
 import pandas as pd
