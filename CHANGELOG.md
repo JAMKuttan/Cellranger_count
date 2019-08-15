@@ -1,13 +1,16 @@
-# v1.2.0 (in development)
+# v1.2.0
 **User Facing**
 * Add Cellranger Version 3.1.0
-* Add CI Artifacts
-* Add Vizapp
+* Add human/mouse farmyard reference Version 3.1.0 from 10x
+* Add Vizapp (shiny)
+* Fix mutiqc error
+* Add MIT License
 
 **Background**
+* Add CI Artifacts
 
 *Known Bugs*
-
+* Vizapp does not yet work for Astrocyte
 
 # v1.1.0
 **User Facing**
