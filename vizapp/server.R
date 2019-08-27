@@ -104,17 +104,8 @@ shinyServer(function(input,output,session){
   })
   output$nav.qc <- renderUI({
     req(values$results()$sample)
-    tabPanel("Output",
-      sidebarPanel(
-        h3(textOutput("lab.sample.qc")),
-        h4(textOutput("lab.cell.count")),
-        br(),
-        tableOutput("qc")
-      ),
-      mainPanel(
-        plotOutput("plot.cliffknee")
-      )
-    )
+    xml2::write_html(rvest::html_node(xml2::read_html(Sys.glob("workflow/output/multiqc/*/multiqc_report.html")), "body"), file = "workflow/output/multiqc/multiqc_report_vizapp.html")
+    includeHTML("workflow/output/multiqc/multiqc_report_vizapp.html")
   })
   
   #sidebar input/outputs
