@@ -25,7 +25,7 @@ To Run:
     * column 1 = "Sample"
     * column 2 = "fastq_R1"
     * column 3 = "fastq_R2"
-    * can have repeated "Sample" if there are multiole fastq R1/R2 pairs for the samples
+    * can have repeated "Sample" if there are multiple fastq R1/R2 pairs for the samples
     * eg: can be downloaded [HERE](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/blob/master/docs/design.csv)
   * **genome**
     * Reference species and genome used for alignment and subsequent analysis.
