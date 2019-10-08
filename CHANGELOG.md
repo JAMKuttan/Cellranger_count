@@ -1,3 +1,11 @@
+# v1.3.0 (in development)
+**User Facing**
+
+**Background**
+* Add Nextflow Tower integration into CI (GHH's profile)
+
+*Known Bugs*
+
 # v1.2.0
 **User Facing**
 * Add Cellranger Version 3.1.0
